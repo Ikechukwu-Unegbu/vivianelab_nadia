@@ -1,0 +1,19 @@
+<div class="therapist_holder container">
+  
+  <!-- <h1>Hi there i am not showing</h1> -->
+  {% for thera in theras %}
+    <div class=" card m-1">
+      <div class="card-body">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+
+      <div class="mt-2 mb-3">
+        <h4 class="fw-normal"><a href="/therapist/{{thera.username}}/{{thera.id}}">{{thera.fullname}}</a></h4>
+        <small>{% if thera.tagline == None %} {% else %} {{thera.tagline}} {% endif %}</small>
+      </div>
+      
+      <p>{% if thera.tagline == None %} {% else %} {{thera.bio}} {% endif %}</p>
+      <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+      </div>
+    </div><!-- /.col-lg-4 -->
+  {% endfor %}
+  </div>

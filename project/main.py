@@ -9,7 +9,11 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('home.html')
+    theras = Therapist.query.limit(4).all()
+    if len(theras) < 4:
+        theras = Therapist.query.all()
+        # return therapists  
+    return render_template('home.html', theras=theras)
 
 @main.route('/dashboard')
 @login_required
@@ -22,5 +26,6 @@ def dashboard():
 
 @main.route('/admin/home')
 def admin_home():
-    therapists = User.query.all()
-    return render_template('admin/home.html', therapists=therapists)
+    therapists = Therapist.query.all()
+    users = User.query.all()
+    return render_template('admin/home.html', therapists=therapists, users=users)

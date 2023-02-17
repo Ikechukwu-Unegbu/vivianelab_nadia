@@ -1,6 +1,8 @@
+import random
 from flask_login import UserMixin
 from .. import db 
 from enum import Enum
+from sqlalchemy import Column
 
 class GenderEnum(Enum):
     MALE = 'male'
@@ -23,8 +25,33 @@ class Therapist(UserMixin, db.Model):
     verified = db.Column(db.Integer(),nullable=True, default=0)
     addrss = db.Column(db.Text(), nullable=True)
     blocked = db.Column(db.Integer,nullable=True, default=0)        
+    bio = db.Column(db.Text(), nullable=True)
+    tagline = db.Column(db.Text(), nullable=True)
 
 
     @classmethod
     def get_all(cls):
         return cls.query.all()
+
+
+
+    @classmethod
+    def get_random_therapists(cls, num_therapists=5):
+        # get the total number of therapists in the table
+        total_therapists = cls.query.count()
+
+        # get five random therapist objects from the table
+        random_therapists = []
+        for _ in range(num_therapists):
+            # generate a random index for the therapist to retrieve
+            rand_index = random.randint(0, total_therapists - 1)
+            # retrieve the therapist at the generated index
+            therapist = cls.query.offset(rand_index).first()
+            # add the therapist to the list of random therapists
+            random_therapists.append(therapist)
+
+        return random_therapists
+
+
+
+

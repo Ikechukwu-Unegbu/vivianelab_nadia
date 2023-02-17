@@ -1,0 +1,30 @@
+.therapist_holder{
+    display: grid;
+    /* flex-direction: row; */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 1rem;
+}
+
+@media(max-width:1000px){
+    .therapist_holder{
+        display: grid;
+        /* flex-direction: row; */
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        grid-gap: 1rem;
+    }
+}
+
+@media(max-width:600px){
+    .therapist_holder{
+        display: grid;
+        /* flex-direction: row; */
+        grid-template-columns: 1fr;
+        justify-content: center;
+        align-items: center;
+        grid-gap: 1rem;
+    }
+}
