@@ -47,4 +47,8 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    # profile blue prints
+    from .Blue_Prints.Profile.profile import profile as profile_bluepring
+    app.register_blueprint(profile_bluepring)
+
     return app
