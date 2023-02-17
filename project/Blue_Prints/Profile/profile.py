@@ -7,8 +7,12 @@ from ...Services.Helpers import get_user_type
 # from .models.Therapist import Therapist
 from ...models.User import User
 
-profile = Blueprint('profile', __name__)
+profile = Blueprint('profile', __name__, template_folder='templates')
 
 @profile.route('/dashboard/my/')
 def myprofile():
-   return "we are here"
+    # make sure that given id is same as auth user id
+    # get type instance of logged in user
+    #  fetch user deatails from the right table
+
+   return render_template('profile.html')
