@@ -2,6 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user
 # init SQLAlchemy so we can use it later in our models
+from flask_migrate import Migrate
+# from .models.User import User
+# from .models.Therapist import Therapist
+# from .models.Admin import Admin
+# from .models.Appointment import Appointment
+# from .models.City import City
+migrate = Migrate()
 db = SQLAlchemy()
 
 def create_app():
@@ -11,6 +18,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     db.init_app(app)
+    migrate.init_app(app, db)
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
