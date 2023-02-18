@@ -3,14 +3,14 @@ from flask_login import UserMixin
 from .. import db 
 from enum import Enum
 from sqlalchemy import Column
-
+from .BaseModel import BaseModel
 class GenderEnum(Enum):
     MALE = 'male'
     FEMALE = 'female'
     OTHER = 'other'
 
 
-class Therapist(UserMixin, db.Model):
+class Therapist(BaseModel,UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     username = db.Column(db.String(100), unique=True)
@@ -52,6 +52,7 @@ class Therapist(UserMixin, db.Model):
 
         return random_therapists
 
+    
 
 
 

@@ -45,6 +45,10 @@ body{
     margin-top: -2rem !important;
     /* z-index: 1; */
 }
+#avatar-action-holder{
+    display: none;
+}
+
 .profile_section{
     width: 70%;
     margin-right: 0 !important;

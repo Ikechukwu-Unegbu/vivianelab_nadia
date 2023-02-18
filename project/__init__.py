@@ -3,11 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user
 # init SQLAlchemy so we can use it later in our models
 from flask_migrate import Migrate
-# from .models.User import User
-# from .models.Therapist import Therapist
-# from .models.Admin import Admin
-# from .models.Appointment import Appointment
-# from .models.City import City
+
 migrate = Migrate()
 db = SQLAlchemy()
 
@@ -15,6 +11,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
+    app.config['AVATAR_FOLDER'] = '/static/uploads/avatar'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     db.init_app(app)

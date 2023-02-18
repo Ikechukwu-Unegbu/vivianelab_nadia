@@ -7,13 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<script>
-  function profilePic(){
-    console.log('clicked')
-     hidden = document.getElementById('pic_input');
-     hidden.click()
-  }
-</script>
+
 <div>
     <div class="profile_header pt-5">
         <h4 class="text-center text-light">{{therapist.fullname}}</h4>
@@ -21,8 +15,9 @@
     <div class="profile_container container">
         <aside class="profile_aside">
             <div class="profile_intro">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" class="img pic img-fluid" alt="">
-              <button class="btn btn-sm" onclick="profilePic()" id="pic-btn"><i style="color:white;" class="fa-solid fa-camera"></i></button>
+              <!-- <a href="{{ url_for('profile.static', filename='uploads/avatar'+therapist.avatar) }}">img</a> -->
+              <img src="{{ url_for('profile.static', filename='uploads/avatar'+therapist.avatar) }}" class="img pic img-fluid" alt="">
+              <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#image-upload-modal" id="pic-btn"><i style="color:white;" class="fa-solid fa-camera"></i></button>
               <h5 class=" mt-2">{{therapist.fullname}}</h5>
               <small><b>
                 {% if therapist.tagline == None %}
@@ -175,9 +170,9 @@
     });
     
 
-    var myModal = new bootstrap.Modal(document.getElementById('image-upload-modal'), {})
-    myModal.show()
-    console.log('image added.')
+    // var myModal = new bootstrap.Modal(document.getElementById('image-upload-modal'), {})
+    // myModal.show()
+    // console.log('image added.')
   }
 </script>
 {% endblock %}

@@ -12,7 +12,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="mod_body">
-            <img src="" id="new" alt="">
+            <form action="/avatar/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <img src="" style="width:7rem; height:7rem; border-radius: 50%;" id="preview" class="img img-fluid" alt="">
+                    <div id="avatar-action-holder">
+                      <button class="btn" type="button"><i class="fa-solid fa-xmark"></i></button>
+                      <button class="btn" type="submit"><i class="fa-solid fa-floppy-disk"></i></button>
+                    </div>
+                </div>
+                <input type="file" name="file" id="file" style="display:none;">
+                <div class="form-group">
+                  <button type="button" id="upload_btn" style="float:right;" class="btn btn-primary btn-default">
+                    upload 
+                    <i class="fa-solid fa-2x fa-cloud-arrow-up"></i>
+                  </button>
+                </div>
+            </form>
         </div>
         <!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -21,3 +36,36 @@
       </div>
     </div>
   </div>
+  <script>
+    const upload_btn = document.getElementById('upload_btn')
+    const file=  document.getElementById('file')
+    upload_btn.addEventListener('click', function(){
+      file.click()
+    })
+  file.addEventListener('change', function(event){
+      console.log('changed')
+    
+    let imageInput = document.getElementById('file')
+          // Get selected image file
+      const file = imageInput.files[0];
+
+      // Create file reader instance
+      const reader = new FileReader();
+
+      // Set event handler for when file is loaded
+      reader.addEventListener('load', function() {
+        // Set image preview source to data URL
+        document.getElementById('preview').src = reader.result;
+      });
+
+      // Read image file as data URL
+      reader.readAsDataURL(file);
+
+         
+
+      document.getElementById('preview').src = reader.result
+      document.getElementById('avatar-action-holder').style.display = 'block'
+    });
+
+
+  </script>
