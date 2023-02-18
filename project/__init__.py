@@ -51,4 +51,7 @@ def create_app():
     from .Blue_Prints.Profile.profile import profile as profile_bluepring
     app.register_blueprint(profile_bluepring)
 
+    from .Blue_Prints.Uploads.file import file_upload as fileupload_blueprint
+    app.register_blueprint(fileupload_blueprint)
+
     return app

@@ -1,0 +1,165 @@
+{% extends "layouts/guest.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('profile.static', filename='css/profile.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Fake Title</title>
+{% endblock %}
+
+{% block content %}
+<script>
+  function profilePic(){
+    console.log('clicked')
+     hidden = document.getElementById('pic_input');
+     hidden.click()
+  }
+</script>
+<div>
+    <div class="profile_header pt-5">
+        <h4 class="text-center text-light">{{therapist.fullname}}</h4>
+    </div>
+    <div class="profile_container container">
+        <aside class="profile_aside">
+            <div class="profile_intro">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" class="img pic img-fluid" alt="">
+              <button class="btn btn-sm" onclick="profilePic()" id="pic-btn"><i style="color:white;" class="fa-solid fa-camera"></i></button>
+              <h5 class=" mt-2">{{therapist.fullname}}</h5>
+              <small><b>
+                {% if therapist.tagline == None %}
+                    Add a Tagline
+                {% else %}
+                    {{therapist.tagline}}
+                {% endif %}
+              </b></small>
+            </div>
+            <div class="profile_info">
+              <div class=""></div>
+              <div></div>
+            </div>
+     
+            <!-- language -->
+            <div class="">
+              <h5 class="">Languages</h5>
+              <div class="deet mt-2">
+                <span class="deet_key">English: </span>
+                <span>Fluent</span>
+              </div>
+              <div class="deet mt-2">
+                <span class="deet_key">English: </span>
+                <span>Fluent</span>
+              </div>
+     
+            </div>
+            <!-- Packages -->
+            <div class="mt-5">
+                <h5>Charge Plans</h5>
+                <div>
+                  <span>One off - </span>
+                  <span>N3000</span>
+                  <span>More</span>
+                </div>
+                <div>
+                  <span>Monthly - </span>
+                  <span>N3000</span>
+                  <span>More</span>
+                </div>
+                <div>
+                  <span>Quarterly - </span>
+                  <span>N3000</span>
+                  <span>More</span>
+                </div>
+            </div>
+     
+        </aside>
+        <!-- profile section -->
+        <section class="profile_section">
+          <!-- <h3>Section</h3> -->
+          <!-- bio -->
+          <div class="">
+            <div class="bio_title">
+                <h3>Bio</h3>
+                <button class="btn btn-sm"  data-bs-toggle="modal" data-bs-target="#bio-edit"><i class="fa-solid fa-pen"></i></button>
+                {% include "profile/_bio_modal.html" %}
+                {% include "profile/_image_modal.html" %}
+            </div>
+            <div class="bio-text">
+                {% if therapist.bio == None %}
+                    Add a bio
+                {% else %}
+                    {{therapist.bio}}
+                {% endif %}
+            </div>
+          </div>
+          <!-- education -->
+          <hr>
+          <div class="educaction mb-3">
+            <div class="bio_title">
+                <h3>Work History</h3>
+                <button class="btn btn-sm"><i class="fa-solid fa-pen"></i></button>
+            </div>
+            <div class="edu-deet mt-3">
+              <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
+              <span><small>Medical Rehabilitaion</small></span>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
+              </p>
+            </div>
+            <div class="edu-deet mt-3">
+              <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
+              <span><small>Medical Rehabilitaion</small></span>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
+              </p>
+            </div>
+          </div>
+          <hr>
+          <!-- work history -->
+          <div class="educaction mb-3">
+            <div class="bio_title">
+                <h3>Education</h3>
+                <button class="btn btn-sm"><i class="fa-solid fa-pen"></i></button>
+            </div>
+            <div class="edu-deet mt-3">
+              <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
+              <span><small>Resident Physiotherapist</small></span>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
+              </p>
+            </div>
+            <div class="edu-deet mt-3">
+              <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
+              <span><small>Pain Manager</small></span>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
+              </p>
+            </div>
+          </div>
+        </section>
+        <!-- profile section end -->
+     </div>
+</div>
+<input type="file" name="pic_input" onchange="imageAdded()" id="pic_input" style="display:none;">
+<script>
+  field = document.getElementById(pic_input)
+  function imageAdded(){
+     // get the selected file
+    const file = event.target.files[0];
+
+    // create a new FileReader
+    const reader = new FileReader();
+
+    // listen for when the FileReader has loaded the file
+    reader.addEventListener('load', function() {
+      
+      // set the image source to the file data
+      image.src = reader.result;
+      console.log(reader.result)
+      _new = document.getElementById('new')
+      _new.src = reader.result
+    });
+
+    var myModal = new bootstrap.Modal(document.getElementById('image-upload-modal'), {})
+    myModal.show()
+  }
+</script>
+{% endblock %}
