@@ -7,7 +7,7 @@ from ...Services.Helpers import get_user_type
 # from .models.Therapist import Therapist
 from ...models.User import User
 
-file_upload = Blueprint('profile', __name__, template_folder='templates', static_folder="static", static_url_path='/profile/static')
+file_upload = Blueprint('file', __name__, template_folder='templates', static_folder="static", static_url_path='/file/static')
 
 @file_upload.route('/dp/upload/')
 def profilepic_upload():

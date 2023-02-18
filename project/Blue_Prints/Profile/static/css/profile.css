@@ -1,6 +1,6 @@
-/* body{
-    overflow-x: hidden;
-} */
+body{
+    overflow-x: hidden !important;
+}
 .profile_header{
     height: 30vh !important;
     width: 100% !important;

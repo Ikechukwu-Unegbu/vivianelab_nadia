@@ -150,16 +150,34 @@
 
     // listen for when the FileReader has loaded the file
     reader.addEventListener('load', function() {
-      
+      // create a new image element
+      const image = new Image();
+
+      // listen for when the image has loaded
+      image.addEventListener('load', function() {
+        // access the image data
+        const canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0);
+        const imageData = context.getImageData(0, 0, image.width, image.height);
+
+        // process the image data here
+        console.log('image data:', imageData);
+      });
+
       // set the image source to the file data
-      image.src = reader.result;
+      // image.src = reader.result;
       console.log(reader.result)
       _new = document.getElementById('new')
       _new.src = reader.result
     });
+    
 
     var myModal = new bootstrap.Modal(document.getElementById('image-upload-modal'), {})
     myModal.show()
+    console.log('image added.')
   }
 </script>
 {% endblock %}
