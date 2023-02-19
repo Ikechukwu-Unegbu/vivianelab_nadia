@@ -10,7 +10,14 @@ from ...models.User import User
 from ...models.Work import Work 
 from ...models.Education import Education
 
+from jinja2 import Environment
+
 profile = Blueprint('profile', __name__, template_folder='templates', static_folder="static", static_url_path='/profile/static')
+
+
+
+
+
 
 @profile.route('/uploads/')
 def uploaded_file():
@@ -101,6 +108,36 @@ def add_work_history():
     return redirect(referer) 
 
 
+@profile.route('/edit-work/<int:id>', methods=["POST"])
+@login_required 
+def edit_work_history(id):
+    employer = request.form.get('employer')
+    title = request.form.get('job_title')
+    description = request.form.get('description')
+    starting_month = request.form.get('starting_month')
+    starting_year = request.form.get('starting_year')
+    ending_year = request.form.get('ending_year')
+    ending_month = request.form.get('ending_month')
+    # therapist = Therapist.q
+    work = Work.query.get(id)
+    work.employer=employer
+    work.jobrole=title
+    work.description=description
+    work.starting_month=starting_month
+    work.starting_year=starting_year
+    work.ending_month=ending_month
+    work.ending_year=ending_year
+ 
+
+    # db.session.add(work)
+    db.session.commit()
+    referer = request.headers.get('Referer')
+    return redirect(referer) 
+
+
+
+
+
 
 @profile.route('/add-education', methods=["POST"])
 @login_required 
@@ -130,3 +167,57 @@ def add_education_history():
     referer = request.headers.get('Referer')
     return redirect(referer) 
 
+
+
+
+
+@profile.route('/edit-education/<int:id>', methods=["POST"])
+@login_required 
+def edit_education_history(id):
+    school = request.form.get('school')
+    course = request.form.get('course')
+    description = request.form.get('description')
+    starting_month = request.form.get('starting_month')
+    starting_year = request.form.get('starting_year')
+    ending_year = request.form.get('ending_year')
+    ending_month = request.form.get('ending_month')
+    # therapist = Therapist.q
+    edu = Education.query.get(id)
+    edu.school = school
+    edu.course = course
+    edu.description = description
+    edu.starting_month = starting_month
+    edu.starting_year = starting_year
+    edu.ending_year = ending_year
+    edu.ending_month = ending_month
+
+    # db.session.update(edu)
+    db.session.commit()
+    referer = request.headers.get('Referer')
+    return redirect(referer) 
+
+
+
+@profile.route('/delete-work/<id>')
+@login_required
+def delete_work(id):
+    # find the record you want to delete
+    work = Work.query.get(id)
+
+# if the record exists, delete it
+    if work:
+        db.session.delete(work)
+        db.session.commit()
+    return redirect(request.referrer)
+
+@profile.route('/delete-education/<id>')
+@login_required
+def delete_education(id):
+    # find the record you want to delete
+    edu = Education.query.get(id)
+
+# if the record exists, delete it
+    if edu:
+        db.session.delete(edu)
+        db.session.commit()
+    return redirect(request.referrer)

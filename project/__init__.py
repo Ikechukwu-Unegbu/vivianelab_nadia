@@ -3,11 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user
 # init SQLAlchemy so we can use it later in our models
 from flask_migrate import Migrate
-# from .models.Therapist import Therapist
-# from .models.User import User
-# from .models.Admin import Admin
-# from .models.City import City 
-# from .models.Work import Work
+
 
 
 # migrate = Migrate()
@@ -25,6 +21,7 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+
 
     from .models.User import User
     from .models.Therapist import Therapist

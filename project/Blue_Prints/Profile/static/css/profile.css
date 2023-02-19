@@ -5,6 +5,8 @@ body{
     height: 30vh !important;
     width: 100% !important;
     background-color: gray;
+    z-index: -1 !important;
+    
 }
 
 .profile_container{
@@ -12,20 +14,23 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* align-items: center; */
-    /* margin-top: -7rem; */
-    background-color: rgb(232, 228, 228);
-    /* background-color: rgb(230, 230, 230) !important;
-    box-shadow: 0 0 0 8px white; */
+    /* background-color: aqua; */
+    z-index: 1;
+    margin-top: -5rem;
+    opacity:1;
+   
     width: 80%;
-    /* margin-right: 0 !important;
-    padding-right: 0 !important; */
+    grid-gap: 2rem;
 }
 
 .profile_aside{
     width: 30%;
+    box-shadow: 0 0 15px rgb(234, 234, 234);
+    padding-left: 1rem;
     /* background-color: black !important; */
-
+    opacity: 1 !important;
+    z-index: 1 !important;
+    background-color: white !important;
 }
 .profile_intro{
     display: flex;
@@ -45,6 +50,15 @@ body{
     margin-top: -2rem !important;
     /* z-index: 1; */
 }
+
+.booking-div{
+    display: flex;
+    grid-gap: 1rem;
+}
+.booking-div .btn{
+    width: 7rem;
+}
+
 #avatar-action-holder{
     display: none;
 }
@@ -52,8 +66,12 @@ body{
 .profile_section{
     width: 70%;
     margin-right: 0 !important;
-    padding-right: 0 !important;
+    padding-right: 1rem !important;
+    padding-left: 1rem;
     /* background-color: red !important; */
+    box-shadow: 0 0 15px rgb(234, 234, 234);
+    background-color: white !important;
+    
 }
 
 .bio_title{

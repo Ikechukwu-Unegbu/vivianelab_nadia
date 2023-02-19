@@ -1,0 +1,30 @@
+.metrics{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 2rem;
+}
+
+.metrics .card{
+    height: 13rem;
+    width: 33%;
+
+    border-style: none !important;
+    box-shadow: 0 0 10px rgb(198, 196, 196);
+}
+.metrics .card .card-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.met-icon{
+    padding: 1.2rem;
+    box-shadow: 0 0 8px gray;
+    border-radius: 50%;
+    height: 5.5rem;
+    width: 5.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+}

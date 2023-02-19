@@ -4,7 +4,7 @@
   </button> -->
   
   <!-- Modal -->
-  <div class="modal fade" id="edu-add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="education-edit-{{education.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,28 +12,28 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{url_for('profile.add_education_history')}}" method="post">
+          <form action="{{url_for('profile.edit_education_history', id=education.id)}}" method="post">
             <div class="form-group">
                 <label for="" class="form-label">School</label>
-                <input type="text" name="school" class="form-control">
+                <input type="text" name="school" class="form-control" value="{{education.school}}">
             </div>
             <div class="form-group mt-3">
                 <label for="" class="form-label">Description</label>
-                <textarea name="description" id="" cols="30" rows="3" class="form-control"></textarea>
+                <textarea name="description" id="" cols="30" rows="3" class="form-control">{{education.description}}</textarea>
             </div>
             <div class="form-group mt-3">
                 <label for="" class="form-label">Course</label>
-                <input type="text" name="course" class="form-control">
+                <input type="text" name="course" class="form-control" value="{{education.course}}">
             </div>
             <div class=" mt-3">
                 <label for="" class="form-label">Starting</label>
                 <div class="holder">
                     <div class="form-group">
                         <!-- <label for="" class="form-label"></label> -->
-                        <input type="text" name="starting_month" placeholder="12" class="form-control">
+                        <input type="text" name="starting_month" placeholder="12" class="form-control" value="{{education.starting_month}}">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="starting_year" placeholder="2020" class="form-control">
+                        <input type="text" name="starting_year" placeholder="2020" class="form-control" value="{{education.starting_year}}">
                     </div>
                 </div>
             </div>
@@ -42,10 +42,10 @@
                 <div class="holder">
                     <div class="form-group">
                         <!-- <label for="" class="form-label"></label> -->
-                        <input type="text" name="ending_month" placeholder="09" class="form-control">
+                        <input type="text" name="ending_month" placeholder="09" class="form-control" value="{{education.ending_month}}">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="ending_year"  placeholder="2023"class="form-control">
+                        <input type="text" name="ending_year"  placeholder="2023"class="form-control" value="{{education.ending_year}}">
                     </div>
                 </div>
             </div>
@@ -61,6 +61,24 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Understood</button>
         </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="education-delete-{{education.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Confirmation</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5>Are you sure about deleting this record?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="/delete-education/{{education.id}}" class="btn btn-sm btn-primary">Yes, Delete</a>
+        </div>
       </div>
     </div>
   </div>
