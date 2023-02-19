@@ -93,42 +93,69 @@
                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#work-add"><i class="fa-solid fa-pen"></i></button>
                 {% include "profile/_work_modal.html" %}
             </div>
+            {% for emps in work %}
             <div class="edu-deet mt-3">
+              <div class="edu-heading">
+                <h5 class="">{{emps.employer}} - <span>2014 - 2021</span></h5>
+                <div class="edu-heading-actions">
+                  <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#work-edit-{{emps.id}}">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
+              <span><small>{{emps.jobrole}}</small></span>
+              <p>
+                {{emps.description}}
+              </p>
+            </div>
+            {% include "profile/_work_mod_modal.html" %}
+            {% endfor %}
+            <!-- <div class="edu-deet mt-3">
               <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
               <span><small>Medical Rehabilitaion</small></span>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
               </p>
-            </div>
-            <div class="edu-deet mt-3">
-              <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
-              <span><small>Medical Rehabilitaion</small></span>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
-              </p>
-            </div>
+            </div> -->
           </div>
           <hr>
           <!-- work history -->
           <div class="educaction mb-3">
             <div class="bio_title">
                 <h3>Education</h3>
-                <button class="btn btn-sm"><i class="fa-solid fa-pen"></i></button>
+                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#edu-add"><i class="fa-solid fa-pen"></i></button>
+                {% include "profile/_education_modal.html" %}
             </div>
+            {% for education in edu %}
             <div class="edu-deet mt-3">
-              <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
+              <!-- <h5 class="">{{education.school}} - <span>2014 - 2021</span></h5> -->
+              <div class="edu-heading">
+                <h5 class="">{{education.school}} - <span>2014 - 2021</span></h5>
+                <div class="edu-heading-actions">
+                  <button class="btn btn-default btn-sm">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
               <span><small>Resident Physiotherapist</small></span>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
+                {{education.description}}
               </p>
             </div>
-            <div class="edu-deet mt-3">
+            {% endfor %}
+            <!-- <div class="edu-deet mt-3">
               <h5 class="">University of Nigeria Nsukka - <span>2014 - 2021</span></h5>
               <span><small>Pain Manager</small></span>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, voluptas?
               </p>
-            </div>
+            </div> -->
           </div>
         </section>
         <!-- profile section end -->

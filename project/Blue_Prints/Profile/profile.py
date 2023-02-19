@@ -23,10 +23,10 @@ def myprofile():
     # make sure that given id is same as auth user id
 
     therapist = Therapist.query.filter_by(id=current_user.id).first()
-    # get type instance of logged in user
-    #  fetch user deatails from the right table
+    edu = Education.query.filter_by(therapist_id=current_user.id).all()
+    work = Work.query.filter_by(therapist_id=current_user.id).all()
 
-    return render_template('/profile/profile.html', therapist=therapist)
+    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu)
 
 @profile.route('/update/bio-tagline', methods=["POST"])
 @login_required
@@ -102,7 +102,7 @@ def add_work_history():
 
 
 
-@profile.route('/add-work', methods=["POST"])
+@profile.route('/add-education', methods=["POST"])
 @login_required 
 def add_education_history():
     school = request.form.get('school')
