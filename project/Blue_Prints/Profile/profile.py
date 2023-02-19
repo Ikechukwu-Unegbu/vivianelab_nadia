@@ -7,6 +7,8 @@ from ...Services.Helpers import get_user_type
 # from .Services.Helpers import get_user_type
 # from .models.Therapist import Therapist
 from ...models.User import User
+from ...models.Work import Work 
+from ...models.Education import Education
 
 profile = Blueprint('profile', __name__, template_folder='templates', static_folder="static", static_url_path='/profile/static')
 
@@ -69,3 +71,62 @@ def upload_avatar():
              
     referer = request.headers.get('Referer')
     return redirect(referer) 
+
+@profile.route('/add-work', methods=["POST"])
+@login_required 
+def add_work_history():
+    employer = request.form.get('employer')
+    title = request.form.get('job_title')
+    description = request.form.get('description')
+    starting_month = request.form.get('starting_month')
+    starting_year = request.form.get('starting_year')
+    ending_year = request.form.get('ending_year')
+    ending_month = request.form.get('ending_month')
+    # therapist = Therapist.q
+    work = Work(
+        employer=employer,
+        jobrole=title,
+        description=description,
+        starting_month=starting_month,
+        starting_year=starting_year,
+        ending_month=ending_month,
+        ending_year=ending_year,
+        # created_at=datetime.utcnow(),
+        therapist_id=current_user.id 
+    )
+
+    db.session.add(work)
+    db.session.commit()
+    referer = request.headers.get('Referer')
+    return redirect(referer) 
+
+
+
+@profile.route('/add-work', methods=["POST"])
+@login_required 
+def add_education_history():
+    school = request.form.get('school')
+    course = request.form.get('course')
+    description = request.form.get('description')
+    starting_month = request.form.get('starting_month')
+    starting_year = request.form.get('starting_year')
+    ending_year = request.form.get('ending_year')
+    ending_month = request.form.get('ending_month')
+    # therapist = Therapist.q
+    edu = Education(
+        school=school,
+        course=course,
+        description=description,
+        starting_month=starting_month,
+        starting_year=starting_year,
+        ending_month=ending_month,
+        ending_year=ending_year,
+        # created_at=datetime.utcnow(),
+        therapist_id=current_user.id 
+    )
+
+    db.session.add(edu)
+    db.session.commit()
+    referer = request.headers.get('Referer')
+    return redirect(referer) 
+

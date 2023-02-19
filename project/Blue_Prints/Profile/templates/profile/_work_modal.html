@@ -12,14 +12,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{url_for('profile.update_bio_tagline')}}" method="post">
+          <form action="{{url_for('profile.add_work_history')}}" method="post">
             <div class="form-group">
                 <label for="" class="form-label">Employer</label>
                 <input type="text" name="employer" class="form-control">
             </div>
             <div class="form-group mt-3">
                 <label for="" class="form-label">Description</label>
-                <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                <textarea name="description" id="" cols="30" rows="3" class="form-control"></textarea>
             </div>
             <div class="form-group mt-3">
                 <label for="" class="form-label">Job Title</label>
