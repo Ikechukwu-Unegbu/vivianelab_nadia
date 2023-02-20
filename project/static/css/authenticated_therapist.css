@@ -5,7 +5,9 @@
 }
 
 .metrics .card{
-    height: 13rem;
+    /* height: 13rem; */
+    height: fit-content;
+    padding: 1rem;
     width: 33%;
 
     border-style: none !important;
@@ -27,4 +29,5 @@
     align-items: center;
     justify-self: center;
     align-self: center;
+    margin-bottom: 1rem;
 }

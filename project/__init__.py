@@ -62,4 +62,8 @@ def create_app():
     from .Blue_Prints.Uploads.file import file_upload as fileupload_blueprint
     app.register_blueprint(fileupload_blueprint)
 
+    from .Blue_Prints.Settings.settings import settings as settings_blueprint
+    app.register_blueprint(settings_blueprint)
+    
+
     return app

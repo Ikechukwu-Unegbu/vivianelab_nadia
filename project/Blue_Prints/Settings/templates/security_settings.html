@@ -1,0 +1,56 @@
+{% extends "layouts/guest.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('settings.static', filename='css/settings.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Fake Title</title>
+{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <h4 class="text-center text-dark mt-4 mb-4">Security Settings</h4>
+    <form action="">
+        <div class="form-group">
+            <h5 class="text-dark text-center">Personal</h5>
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="form-label">Phone</label>
+            <input type="text" name="phone"  class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="form-label">Email</label>
+            <input type="text" name="email"  class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="form-label">Username</label>
+            <input type="text" name="username"  class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <button class="btn-primary btn" style="float:right;"> Save</button>
+        </div>
+    </form>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <form action="">
+        <div class="form-group">
+            <h5 class="text-center text-dark">Password</h5>
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="form-label">Old Password</label>
+            <input type="text" name="old_password" class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="form-label">Old Password</label>
+            <input type="text" name="old_password" class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="form-label">Old Password</label>
+            <input type="text" name="old_password" class="form-control">
+        </div>        
+    </form>
+</main>
+
+{% endblock %}
