@@ -10,21 +10,36 @@
 
 <main class="container">
     <h4 class="text-center text-dark mt-4 mb-4">Security Settings</h4>
-    <form action="">
+    <form action="{{url_for('settings.settings_misc')}}" method="POST">
         <div class="form-group">
             <h5 class="text-dark text-center">Personal</h5>
         </div>
         <div class="form-group mt-3">
+            {% with messages = get_flashed_messages(category_filter='password_success') %}
+                {% if messages %}
+                    <ul class="success-messages">
+                    {% for message in messages %}
+                    <li>
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    </li>   
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="form-group mt-3">
             <label for="" class="form-label">Phone</label>
-            <input type="text" name="phone"  class="form-control">
+            <input type="text" name="phone" value="{{logged_user.phone}}"  class="form-control">
         </div>
         <div class="form-group mt-3">
             <label for="" class="form-label">Email</label>
-            <input type="text" name="email"  class="form-control">
+            <input type="text" name="email" value="{{logged_user.email}}" class="form-control">
         </div>
         <div class="form-group mt-3">
             <label for="" class="form-label">Username</label>
-            <input type="text" name="username"  class="form-control">
+            <input type="text" name="username" value="{{logged_user.username}}" class="form-control">
         </div>
         <div class="form-group mt-3">
             <button class="btn-primary btn" style="float:right;"> Save</button>
@@ -34,22 +49,56 @@
     <br>
     <br>
     <hr>
-    <form action="">
-        <div class="form-group">
+    <form action="{{url_for('settings.reset_password')}}" method="POST">
+       
+        <div class="form-group mt-3">
             <h5 class="text-center text-dark">Password</h5>
         </div>
         <div class="form-group mt-3">
-            <label for="" class="form-label">Old Password</label>
-            <input type="text" name="old_password" class="form-control">
+            {% with messages = get_flashed_messages(category_filter='password') %}
+                {% if messages %}
+                    <ul class="success-messages">
+                    {% for message in messages %}
+                    <li>
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    </li>   
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        {% with messages = get_flashed_messages(category_filter='password_success') %}
+            {% if messages %}
+                <ul class="success-messages">
+                {% for message in messages %}
+                <li>
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                </li>   
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         </div>
         <div class="form-group mt-3">
             <label for="" class="form-label">Old Password</label>
             <input type="text" name="old_password" class="form-control">
         </div>
         <div class="form-group mt-3">
-            <label for="" class="form-label">Old Password</label>
-            <input type="text" name="old_password" class="form-control">
+            <label for="" class="form-label">New Password</label>
+            <input type="text" name="new_password" class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="form-label">Confirm New Password</label>
+            <input type="text" name="confirm_new" class="form-control">
         </div>        
+        <div class="form-group mt-3">
+            <button style="float:right;" class="btn btn-sm btn-primary">
+                Save
+            </button>
+        </div>
     </form>
 </main>
 

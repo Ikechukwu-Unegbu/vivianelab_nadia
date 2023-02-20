@@ -11,3 +11,13 @@ def get_user_type(user):
         return 'admin'
     else:
         return 'unknown'
+
+# def get_user_withID_by_type(user):
+#     if isinstance(user, User):
+#         return 
+#     elif isinstance(user, Therapist):
+#         return 'therapist'
+#     elif isinstance(user, Admin):
+#         return 'admin'
+#     else:
+#         return 'unknown'
