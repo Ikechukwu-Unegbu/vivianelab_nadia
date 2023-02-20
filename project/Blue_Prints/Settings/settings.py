@@ -109,7 +109,24 @@ def settings_misc():
 
 @settings.route('/settings/payment')
 def payment_settings():
+    """
+        This endpoint renders the html page for payment settings
+    """
     return render_template('payment_settings.html')
 
 
+@settings.route('/settings/verification')
+def verification_settings():
+    """
+        This is web endpoint for verification settings page
+    """
 
+    return render_template('verification_settings.html')
+
+@settings.route('/settings/verification/identity')
+def settings_verification_identity():
+    return render_template('verification_settings.html')
+
+@settings.route('/settings/verification/crime')
+def settings_verification_crime():
+    return render_template('verification_settings.html')

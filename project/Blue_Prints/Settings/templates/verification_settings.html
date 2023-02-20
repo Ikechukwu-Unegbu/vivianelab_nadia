@@ -1,0 +1,31 @@
+{% extends "layouts/guest.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('settings.static', filename='css/settings.css') }}">
+<link rel="stylesheet" href="{{url_for('settings.static', filename='css/verification.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Fake Title</title>
+{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <h3 class="text-center text-dark mt-4">Verification</h3>
+    <div class="verification">
+        <div class="ver_btns">
+            <a class="btn btn-secondary" href="{{url_for('settings.verification_settings')}}">Career</a>
+            <a class="btn btn-primary" href="{{url_for('settings.settings_verification_identity')}}">Identity</a>
+            <a class="btn btn-primary" href="{{url_for('settings.settings_verification_crime')}}">Crime</a>
+        </div>
+    </div>
+    {% if request.path == url_for('settings.verification_settings') %}
+        {% include 'settings/default_verification.html' %}
+    {% elif request.path == url_for('settings.settings_verification_identity') %}
+        {% include 'settings/identity_verification.html' %}
+    {% elif request.path == url_for('settings.settings_verification_crime') %}
+        {% include 'settings/settings_verification_crime.html' %}
+    {% endif %}
+
+</main>
+
+{% endblock %}

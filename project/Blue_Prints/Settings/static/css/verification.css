@@ -1,0 +1,81 @@
+body{
+    overflow-x: hidden !important;
+}
+.verification{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.verification .ver_btns{
+    display: flex;
+    flex-direction: row;
+    grid-gap:2rem;
+}
+
+.ver_btns a{
+    text-decoration: none;
+    width: 8rem;
+    border-radius: 20px !important;
+    box-shadow: 0 0 10px whitesmoke;
+}
+
+
+/* default verification */
+
+.default_verification{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3rem;
+}
+
+.left-default .card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    padding: 3rem;
+}
+
+.left-right{
+    /* display: flex;
+    justify-content:flex-start;
+    align-items: flex-start; */
+}
+
+@media(max-width:700px){
+    .default_verification{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 2rem;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 3rem;
+    }
+    .left-default .card-body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100% ;
+        padding: 3rem;
+    }   
+
+    .verification .ver_btns{
+        display: flex;
+        flex-direction: row;
+        grid-gap:0.2rem;
+    }
+
+    .ver_btns a{
+        text-decoration: none;
+        width: 5rem;
+        border-radius: 20px !important;
+        box-shadow: 0 0 10px whitesmoke;
+    }
+    
+}
