@@ -67,6 +67,9 @@ def create_app():
     
     from .Blue_Prints.Appointment.appointment import appointment as appointment_blueprint
     app.register_blueprint(appointment_blueprint)
-    
+
+    from .Blue_Prints.Admin.General import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint)
+
 
     return app

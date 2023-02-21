@@ -24,8 +24,3 @@ def dashboard():
     if user_type == 'therapist':
         return render_template('authenticated/therapist_dashboard.html')
 
-@main.route('/admin/home')
-def admin_home():
-    therapists = Therapist.query.all()
-    users = User.query.all()
-    return render_template('admin/home.html', therapists=therapists, users=users)
