@@ -65,5 +65,8 @@ def create_app():
     from .Blue_Prints.Settings.settings import settings as settings_blueprint
     app.register_blueprint(settings_blueprint)
     
+    from .Blue_Prints.Appointment.appointment import appointment as appointment_blueprint
+    app.register_blueprint(appointment_blueprint)
+    
 
     return app

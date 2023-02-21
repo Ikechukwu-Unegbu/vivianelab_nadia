@@ -1,0 +1,74 @@
+{% extends "layouts/guest.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('settings.static', filename='css/settings.css') }}">
+<link rel="stylesheet" href="{{url_for('settings.static', filename='css/verification.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <title>Fake Title</title>
+{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <!-- <h3 class="text-center text-dark mt-4 mb-4">Notification</h3> -->
+    
+    <form action="" class="mt-5 mb-5">
+        <div class="form-group">
+            <H4 class="text-center text-dark">Profile Visibility</H4>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="">Profile Visibility</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  I want my profile to be visible  
+                </label>
+              </div>
+        </div>
+        <!-- <hr> -->
+       
+        <button class="btn btn-sm btn-primary" style="float:right;">Save Notification Settings</button>
+    </form>
+    
+    <hr>
+    <div class="mt-4">
+        <h4 class="text-center text-dark">
+            Boost Your Profile
+        </h4>
+        <div class="row">
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Special title treatment</h5>
+                  <p class="card-text text-center">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" style="float:right;" class="btn btn-primary">Boost Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Special title treatment</h5>
+                    <p class="card-text text-center">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" style="float:right;" class="btn btn-primary">Boost Now</a>
+                  </div>
+                </div>
+              </div>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Special title treatment</h5>
+                  <p class="card-text text-center">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" style="float:right;" class="btn btn-primary">Boost Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+</main>
+
+{% endblock %}

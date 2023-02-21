@@ -33,7 +33,7 @@ def notification_settings():
 
 @settings.route('/settings/visibility')
 def visibility_settings():
-    return render_template('notification_settings.html')
+    return render_template('visibility_settings.html')
 
 @settings.route('/settings/security')
 def security_settings():
@@ -130,3 +130,8 @@ def settings_verification_identity():
 @settings.route('/settings/verification/crime')
 def settings_verification_crime():
     return render_template('verification_settings.html')
+
+
+@settings.route('/test-form')
+def test_form():
+    return render_template('form.html')

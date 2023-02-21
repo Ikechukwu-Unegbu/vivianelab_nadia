@@ -1,29 +1,52 @@
-<div class="default_verification">
-    <div class="left-default">
-        <div class="card">
-            <div class="card-body">
-                <!-- <div class="" style="display:center; justify-content: center; align-items: center;"> -->
-                    <i class="fa-solid fa-circle-question fa-3x"></i>
-                    <h4 class="text-center text-dark mt-3">No Gov ID Card</h4>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<div class="career">
+    <form action="" method="post">
+
+        <div id="input_containers" class="mt-3">
+            <div class="input_container">
+              <div class="form-group mt-5">
+                <label for="" class="form-label">Certification Name</label>
+                <input type="text" name="certname_1" class="form-control">
+              </div>
+              <div class="form-group mt-3">
+                <label for="" class="form-label">Url</label>
+                <input type="text" name="url_1" class="form-control">
+              </div>
+              <div class="form-group mt-3">
+                <!-- <div class="input-group mb-3"> -->
+                  <label class="form-label" for="inputGroupFile01">Upload Cert</label>
+                  <input type="file" name="certpics_1" class="form-control" id="inputGroupFile01">
                 <!-- </div> -->
+              </div>
             </div>
+          </div>
+          <button id="add_more" type="button" class="btn btn-default mt-3">
+            <i class="fa-solid fa-plus"></i>
+            Add More</button>
+      
+        <div class="form-group mt-3">
+            <button style="float:right;" class="btn btn-primary">Save</button>
         </div>
-    </div>
-    <div class="left-right">
-            <!-- <div></div> -->
-        <form action="">
-            <div class="form-group mb-4">
-                <div class="input-group mb-3">
-                    <!-- <label class="input-group-text" for="inputGroupFile01"></label> -->
-                    <input type="file" class="form-control" id="inputGroupFile01">
-                  </div>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary" style="float: right;">
-                    Upload ID Now
-                    <i style="color:white;" class="fa-solid fa-cloud"></i>
-                </button>
-            </div>
-        </form>
-    </div>
+    </form>
+    
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function() {
+      var counter = 1;
+      var container = $('#input_containers .input_container').eq(0).clone();
+      
+      $('#add_more').click(function() {
+        counter++;
+        var new_container = container.clone();
+        
+        // Update name attribute values
+        new_container.find('input[name="certname_1"]').attr('name', 'certname_' + counter);
+        new_container.find('input[name="url_1"]').attr('name', 'url_' + counter);
+        new_container.find('input[name="certpics_1"]').attr('name', 'certpics_' + counter);
+        
+        $('#input_containers').append(new_container);
+      });
+    });
+  </script>
+  
