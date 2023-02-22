@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, flash
 from ....models.Therapist import Therapist
 from ....models.User import User
+from ....models.Locations.Country import Country
 from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -12,10 +13,20 @@ def admin_home():
     """
         This endpoint renders admin homepage.
     """
+    countries = Country.query.all()
     therapists = Therapist.query.all()
     users = User.query.all()
-    return render_template('admin/home/home.html', therapists=therapists, users=users)
+    return render_template('admin/home/home.html', therapists=therapists, users=users, countries=countries)
 
 @admin.route('/admin/locations')
 def admin_locations():
-    return render_template('admin/locations/index.html')
+    # \admin\locations?__debugger__=yes&cmd=resource&f=console.png
+    countries = Country.query.all()
+    return render_template('admin/locations/index.html', countries=countries)
+
+
+@admin.route('/admin/therapists')
+def admin_therapists():
+    # \admin\locations?__debugger__=yes&cmd=resource&f=console.png
+    countries = Country.query.all()
+    return render_template('admin/therapists/admin_therapists.html', countries=countries)

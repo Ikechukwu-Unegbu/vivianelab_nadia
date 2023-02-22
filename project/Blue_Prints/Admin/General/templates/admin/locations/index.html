@@ -1,21 +1,136 @@
 {% extends "layouts/admin.html" %}
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="row">
 
     <!-- Left side columns -->
-    <div class="col-lg-8">
+    <div class="col-lg-6">
         <div class="">
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new-country">New Country</button>
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new-state">New State</button>
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new-city">New City</button>
             {% include "admin/locations/includes/_new_location_modals.html" %}
         </div>
+        <div class="table-responsive mt-5">
+            <table class="table">
+                <thead>
+                    <h4 class="text-center text-secondary">Country Table</h4>
+                </thead>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Capital</th>
+                    <th scope="col">
+                        Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {% for country in countries %}
+                 <tr id="{{country.id}}">
+                    <th scope="row">{{country.id}}</th>
+                    <td>{{country.name}}</td>
+                    <td>{{country.capital}}</td>
+                    <td>
+                        <button id="{{country.id}}"key="{{country.id}}" onclick="getstatetable(this.id)" class="btn btn-sm btn-primary text-light">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm ">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button class="btn btn-sm btn-secondary">
+                            <i class="fa-solid fa-ban"></i>
+                            <!-- <i class="fa-solid fa-pen-to-square"></i> -->
+                        </button>
+                    </td>
+                  </tr>
+                 {% endfor %}
+                 
+                </tbody>
+              </table>
+        </div>
     </div><!-- End Left side columns -->
 
     <!-- Right side columns -->
-    <div class="col-lg-4">
-        <h1>Hi There</h1>
+    <div class="col-lg-6" style="padding-top:5rem;">
+        <!-- <h1>Hi There</h1> -->
+        <table class="table state_tbale" id="state_table">
+            <thead><h4 class="text-center text-secondary">State Table</h4></thead>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Capital</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>
+                    <button class="btn btn-sm btn-primary text-light">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+               
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>
+                    <button class="btn btn-sm btn-primary text-light">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>
+                    <button class="btn btn-sm btn-primary text-light">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 </div>
+<script>
+   
+
+function getstatetable(id){
+    // const sseStateButton = document.getElementById('sse_state');
+    const stateTable = document.getElementById('state_table');
+    // const countryid = sseStateButton.getAttribute('key');
+  // get the selected country id from the first table
+  fetch(`/states-by-country/${id}`)
+    .then(response => response.json())
+    .then(states => {
+      const rowsHtml = states.map(state => {
+        return `
+          <tr>
+            <th scope="row">${state.id}</th>
+            <td>${state.name}</td>
+            <td>${state.capital}</td>
+            <td>
+              <button class="btn btn-sm btn-primary text-light">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+      stateTable.querySelector('tbody').innerHTML = rowsHtml;
+      document.getElementById(id).style.backgroundColor = '#e6e6e6'
+    })
+    .catch(error => console.error(error));
+}
+</script>
 {% endblock %}

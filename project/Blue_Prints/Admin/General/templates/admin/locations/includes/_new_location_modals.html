@@ -5,16 +5,29 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">New Country </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+            <form action="{{url_for('admin_location.save_country')}}" method="POST">
+                <div class="form-group">
+                    <label for="" class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="" class="form-label">Capital</label>
+                    <input type="text" name="capital" class="form-control">
+                </div>
+                <div class="form-group mt-3">
+                    <!-- <label for="" class="form-label"></label> -->
+                    <button class="btn btn-primary" style="float:right;">Save</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Understood</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -27,16 +40,38 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">New State</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+            <form action="{{url_for('admin_location.save_state')}}" method="POST">
+                <div class="form-group">
+                    <label for="" class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="" class="form-label">Capital</label>
+                    <input type="text" name="capital" class="form-control">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="" class="form-label"></label>
+                    <select class="form-select" name="country" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        {% for country in countries%}
+                        <option value="{{country.id}}">{{country.name}}</option>
+                        {% endfor %}
+                      </select>
+                </div>
+                <div class="form-group mt-3">
+                    <!-- <label for="" class="form-label"></label> -->
+                    <button class="btn btn-primary" style="float:right;">Save</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Understood</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -50,16 +85,67 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">New City</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <form action="{{url_for('admin_location.save_city')}}" method="POST">
+            <div class="form-group">
+                <label for="" class="form-label">City Name</label>
+                <input type="text" required name="name" class="form-control">
+            </div>
+            <div class="form-group mt-3">
+                <label for="" class="form-label">Select Country</label>
+                <select class="form-select" name="country" id="country" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    {% for country in countries%}
+                    <option value="{{country.id}}">{{country.name}}</option>
+                    {% endfor %}
+                  </select>
+            </div>
+            <div class="form-group mt-3">
+                <label for="" class="form-label">Select State</label>
+                <select class="form-select" name="state" id="state" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                </select>
+            </div>
+            <div class="form-group mt-3">
+                <!-- <label for="" class="form-label"></label> -->
+                <button class="btn btn-primary" style="float:right;">Save</button>
+            </div>
+          </form>
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Understood</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
+  <script>
+    let country = document.getElementById('country')
+    country.addEventListener('change', function(){
+
+        let stateSelect = document.getElementById("state");
+
+        // call endpoint to get states
+        fetch(`/states-by-country/${country.value}`)
+        .then(response => response.json())
+        .then(data => {
+            // clear existing options
+            stateSelect.innerHTML = "";
+
+            // add new options
+            data.forEach(state => {
+            let option = document.createElement("option");
+            option.value = state.id;
+            option.text = state.name;
+            stateSelect.appendChild(option);
+            });
+        });
+
+
+
+    
+    })
+  </script>

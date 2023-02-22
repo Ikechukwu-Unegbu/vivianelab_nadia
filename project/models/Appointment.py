@@ -15,3 +15,4 @@ class Appointment(db.Model):
     done_therapist = db.Column(db.DateTime, nullable=True)
     cancel =  db.Column(db.Integer,nullable=True, default=0)
     cancel_by =  db.Column(db.Integer,nullable=True)
+    

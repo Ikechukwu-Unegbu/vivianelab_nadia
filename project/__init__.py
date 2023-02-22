@@ -71,5 +71,8 @@ def create_app():
     from .Blue_Prints.Admin.General.admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint)
 
+    from .Blue_Prints.Admin.Location.admin_location import admin_location as admin_location_blueprint
+    app.register_blueprint(admin_location_blueprint)
+
 
     return app
