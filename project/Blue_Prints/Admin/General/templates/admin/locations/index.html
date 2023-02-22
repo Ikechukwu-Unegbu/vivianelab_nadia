@@ -5,7 +5,12 @@
 
     <!-- Left side columns -->
     <div class="col-lg-8">
-      
+        <div class="">
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new-country">New Country</button>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new-state">New State</button>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new-city">New City</button>
+            {% include "admin/locations/includes/_new_location_modals.html" %}
+        </div>
     </div><!-- End Left side columns -->
 
     <!-- Right side columns -->
