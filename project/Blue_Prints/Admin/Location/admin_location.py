@@ -34,6 +34,7 @@ def save_state():
     flash('New state added to database')
     return redirect(request.referrer)
 
+
 @admin_location.route('/new/city', methods=["POST"])
 def save_city():
     name = request.form.get('name')
@@ -48,6 +49,12 @@ def save_city():
     
     # return redirect(request.referrer)
 
+
+@admin_location.route('/cities-by-state/<int:state_id>')
+def get_cities_by_state(state_id):
+    cities = City.query.filter_by(state_id=state_id).all()
+    city_list = [{'id': c.id, 'name': c.name} for c in cities]
+    return jsonify(city_list)
 
 @admin_location.route('/states-by-country/<int:country_id>')
 def get_states_by_country(country_id):

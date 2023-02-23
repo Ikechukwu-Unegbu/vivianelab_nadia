@@ -18,6 +18,7 @@ def index():
 @main.route('/dashboard')
 @login_required
 def dashboard():
+    print(current_user)
     user_type = get_user_type(current_user)
     if user_type == 'user':
         return render_template('authenticated/user_dashboard.html')

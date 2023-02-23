@@ -2,6 +2,7 @@
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('profile.static', filename='css/profile.css') }}">
+<link rel="stylesheet" href="">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Fake Title</title>
 {% endblock %}
@@ -15,9 +16,13 @@
     <div class="profile_container container">
         <aside class="profile_aside">
             <div class="profile_intro">
-              <!-- <a href="{{ url_for('profile.static', filename='uploads/avatar'+therapist.avatar) }}">img</a> -->
+              
+              {% if therapist.avatar == None %}
+              <img src="" class="img pic img-fluid"/>
+              {% else %}
               <img src="{{ url_for('profile.static', filename='uploads/avatar'+therapist.avatar) }}" class="img pic img-fluid" alt="">
-              <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#image-upload-modal" id="pic-btn"><i style="color:white;" class="fa-solid fa-camera"></i></button>
+              {% endif %}
+              <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#image-upload-modal" id="pic-btn"><i class="fa-solid fa-camera"></i></button>
               <h5 class=" mt-2">{{therapist.fullname}}</h5>
               <small><b>
                 {% if therapist.tagline == None %}
@@ -36,6 +41,22 @@
             <!-- language -->
             <div class="">
               <h5 class="">Languages</h5>
+              <div class="deet mt-2">
+                <span class="deet_key">English: </span>
+                <span>Fluent</span>
+              </div>
+              <div class="deet mt-2">
+                <span class="deet_key">English: </span>
+                <span>Fluent</span>
+              </div>
+     
+            </div>
+            <div class="mt-5 ">
+              <div class="location-heading">
+                <h5 class="">Locations</h5>
+                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#locate"><i class="fa-solid fa-pen"></i></button>
+              </div>
+              
               <div class="deet mt-2">
                 <span class="deet_key">English: </span>
                 <span>Fluent</span>
@@ -229,4 +250,6 @@
     // console.log('image added.')
   }
 </script>
+{% include "profile/_location_modal.html" %}
+
 {% endblock %}

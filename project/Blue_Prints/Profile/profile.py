@@ -1,5 +1,8 @@
 import os
-from flask import Blueprint, render_template, request, redirect, flash, url_for, current_app, send_from_directory
+from flask import Blueprint, render_template, request, redirect, flash, url_for, current_app, send_from_directory, jsonify
+from datetime import datetime
+from ...models.Locations.UserCity import UserCity
+from ...Services.Helpers import get_user_type
 from ... import db
 from flask_login import login_required, current_user
 from ...models.Therapist import Therapist
@@ -8,6 +11,7 @@ from ...Services.Helpers import get_user_type
 # from .models.Therapist import Therapist
 from ...models.User import User
 from ...models.Work import Work 
+from ...models.Locations.Country import Country
 from ...models.Education import Education
 
 from jinja2 import Environment
@@ -32,8 +36,11 @@ def myprofile():
     therapist = Therapist.query.filter_by(id=current_user.id).first()
     edu = Education.query.filter_by(therapist_id=current_user.id).all()
     work = Work.query.filter_by(therapist_id=current_user.id).all()
+    country = Country.query.all()
 
-    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu)
+    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu, country=country)
+
+
 
 @profile.route('/update/bio-tagline', methods=["POST"])
 @login_required
@@ -221,3 +228,20 @@ def delete_education(id):
         db.session.delete(edu)
         db.session.commit()
     return redirect(request.referrer)
+
+
+@profile.route('/add-cities', methods=['POST'])
+@login_required
+def add_cities():
+    # get the submitted city IDs as an array
+    city_ids = request.json.get('city_ids')
+    # get the model of the logged-in user
+    user_model = get_user_type(current_user)
+    # add each city ID as a record in the UserCity model for the logged-in user
+    for city_id in city_ids:
+        user_city = UserCity(user_id=current_user.id, city_id=city_id, user_model=user_model, created_at=datetime.now())
+        db.session.add(user_city)
+
+    db.session.commit()
+
+    return jsonify({'success': True}), 200

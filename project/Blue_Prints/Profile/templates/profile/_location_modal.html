@@ -1,0 +1,133 @@
+<div class="modal fade" id="locate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <div class="form-group">
+                <label for="" class="form-label">Country</label>
+                <select class="form-select" id="country" name="country" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    {% for count in country %}
+                    <option value="{{count.id}}">{{count.name}}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <div class="form-group mt-3">
+                <label for="" class="form-label">state</label>
+                <select class="form-select" name="state" id="state" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                  </select>
+              </div>
+              <div class="form-group state_list">
+                  
+              </div>
+              <div class="form-group mt-3">
+                <button class="btn btn-primary" id="save-cities">Save </button>
+              </div>
+
+          </form>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const countrySelect = document.getElementById('country');
+    const stateSelect = document.getElementById('state');
+
+    countrySelect.addEventListener('change', () => {
+        const countryId = countrySelect.value;
+        fetch(`/states-by-country/${countryId}`)
+            .then(response => response.json())
+            .then(states => {
+                // Clear existing state options
+                stateSelect.innerHTML = '<option selected>Open this select menu</option>';
+                // Add new state options
+                states.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state.id;
+                    option.textContent = state.name;
+                    stateSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error(error));
+    });
+
+  
+
+    const stateListDiv = document.querySelector(".state_list"); // / Add event listener to the state select field to fetch cities
+stateSelect.addEventListener("change", async function() {
+  // Get the selected state ID
+  const stateId = this.value;
+
+  // Fetch the cities for the selected state
+  const response = await fetch(`/cities-by-state/${stateId}`);
+  const cities = await response.json();
+
+  // Populate the state list div with checkboxes for the fetched cities
+  stateListDiv.innerHTML = "";
+  cities.forEach(function(city) {
+    const div = document.createElement("div");
+    div.className = "form-check";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = city.id;
+    checkbox.id = `city_${city.id}`;
+    const label = document.createElement("label");
+    label.className = "form-check-label";
+    label.setAttribute("for", `city_${city.id}`);
+    label.textContent = city.name;
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    stateListDiv.appendChild(div);
+  });
+});
+</script>
+
+<script>
+    // Get all the checkboxes in the city list
+const checkboxes = document.querySelectorAll('.form-check-input');
+
+// Get the button to save the selected cities
+const saveBtn = document.querySelector('#save-cities');
+
+// Add a click event listener to the save button
+saveBtn.addEventListener('click', function() {
+  // Initialize an empty array to store the selected city IDs
+  const cityIds = [];
+
+  // Loop through all the checkboxes and check if they are selected
+  checkboxes.forEach(function(checkbox) {
+    if (checkbox.checked) {
+      // If the checkbox is selected, add its value (city ID) to the cityIds array
+      cityIds.push(checkbox.value);
+    }
+  });
+
+  // Make an AJAX call to the /add-cities endpoint with the selected city IDs
+  fetch('/add-cities', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ cityIds })
+  })
+  .then(response => {
+    // Handle the response from the server
+    console.log(response);
+  })
+  .catch(error => {
+    // Handle any errors that occur during the AJAX call
+    console.error(error);
+  });
+});
+
+</script>

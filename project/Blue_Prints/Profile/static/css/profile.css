@@ -8,7 +8,13 @@ body{
     z-index: -1 !important;
     
 }
-
+.location-heading{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: 2rem;
+    /* justify-content: center; */
+}
 .profile_container{
     height: fit-content !important;
     display: flex;
@@ -95,4 +101,8 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+@media(max-width:750px){
+
 }
