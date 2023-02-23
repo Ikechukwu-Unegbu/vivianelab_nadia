@@ -1,24 +1,26 @@
-<h3 class="text-center">Therapist Table</h3>
+<h3 class="text-center">User Table</h3>
 <table id="users_table" class="table table-striped" style="width:100%">
     <thead>
         <tr>
+            <th>Id</th>
             <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         {% for user in users %}
         <tr>
-            <td>Tiger Nixon</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011-04-25</td>
-            <td>$320,800</td>
+            <td>{{user.id}}</td>
+            <td>{{user.fullname}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.email}}</td>
+            <td>nill</td>
+            <td>
+                <button class="btn btn-sm">View</button>
+            </td>
         </tr>
         {% endfor %}
      

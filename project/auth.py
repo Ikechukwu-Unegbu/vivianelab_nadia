@@ -12,49 +12,68 @@ auth = Blueprint('auth', __name__)
 def login():
     return render_template('auth/login.html')
 
-@auth.route('/login',methods=['POST'])
-def login_post():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))
-
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-
-        user = User.query.filter_by(email=email).first()
-        if not user:
-            therapist = Therapist.query.filter_by(email=email).first()
-            if not therapist or not check_password_hash(therapist.password, password):
-                flash('Invalid email or password')
-                return redirect(url_for('auth.login'))
-            login_user(therapist)
-            return redirect(url_for('main.dashboard'))
-        if not check_password_hash(user.password, password):
-            flash('Invalid email or password')
-            return redirect(url_for('auth.login'))
-        login_user(user)
-        return redirect(url_for('main.dashboard'))
-
-    return render_template('auth/login.html')
+# @auth.route('/login',methods=['POST'])
 # def login_post():
 #     if current_user.is_authenticated:
 #         return redirect(url_for('main.dashboard'))
 
-#     if request.method == 'POST':
-#         email = request.form.get('email')
-#         password = request.form.get('password')
-
+#     user_def = request.form.get('user_def')
+#     email = request.form.get('email')
+#     password = request.form.get('password')
+#     if user_def == 'user':
 #         user = User.query.filter_by(email=email).first()
-
-#         if not user or not check_password_hash(user.password, password):
+#         if not user:
 #             flash('Invalid email or password')
 #             return redirect(url_for('auth.login'))
-
+        
+#         if not check_password_hash(user.password, password):
+#             flash('Invalid email or password')
+#             return redirect(url_for('auth.login'))
 #         login_user(user)
 #         return redirect(url_for('main.dashboard'))
 
-#     return render_template('auth/login.html')
-    
+#         # return render_template('auth/login.html')
+#     elif user_def == 'therapist':
+#         therapist = Therapist.query.filter_by(email=email).first()
+#         if not therapist:
+#             flash('Invalid email or password')
+#             return redirect(url_for('auth.login'))
+       
+#         if not check_password_hash(therapist.password, password):
+#             flash('Invalid email or password')
+#             return redirect(url_for('auth.login'))
+#         login_user(therapist)
+#         return redirect(url_for('main.dashboard'))
+
+
+
+
+@auth.route('/login', methods=["POST"])
+def login_now():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user_type = request.form['user_type']
+
+        if user_type == 'user':
+            user = User.query.filter_by(email=email).first()
+            if user and check_password_hash(user.password, password):
+                login_user(user)
+                return redirect(url_for('main.dashboard'))
+        elif user_type == 'therapist':
+            therapist = Therapist.query.filter_by(email=email).first()
+            if therapist and check_password_hash(therapist.password, password):
+                login_user(therapist)
+                return redirect(url_for('main.dashboard'))
+
+        flash('Invalid email or password.')
+        return redirect(url_for('auth.login'))
+
+    return render_template('login.html')
+
 
 
 @auth.route('/user/signup')

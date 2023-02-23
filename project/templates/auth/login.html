@@ -1,6 +1,13 @@
 {% extends "layouts/auth.html" %}
 
 {% block content %}
+<style>
+  .user_def{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+</style>
 <form method="POST" action="/login">
     <!-- <img class="mb-4" src="assets//brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
     <img class="mb-4" src="../../static/pub_imges/bootstrap-logo.svg" alt="" width="72" height="57">
@@ -24,10 +31,22 @@
       <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
+    <div class="form-floating user_def" >
+      <div class="checkbox mb-3">
+        <label class="form-label">
+          <input type="radio" name="user_type" value="therapist"><span> </span>I am Therapist
+        </label>
+      </div>
+      <div class="checkbox mb-3">
+        <label class="form-label">
+          <input type="radio" name="user_type" value="user"><span> </span>I am User
+        </label>
+      </div>
+    </div>
 
     <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" name="remember" value="remember-me"> Remember me
+      <label class="form-label">
+        <input type="checkbox" name="remember-me" value="remember-me"> Remember me
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>

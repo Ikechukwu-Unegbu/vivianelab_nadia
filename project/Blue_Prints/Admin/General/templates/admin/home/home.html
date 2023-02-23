@@ -1,6 +1,7 @@
 {% extends "layouts/admin.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
 <div class="row">
 
     <!-- Left side columns -->
@@ -9,7 +10,7 @@
         <hr>
         <br>
         {% include "admin/home/includes/_users_table.html" %}
-    </div><!-- End Left side columns -->
+    </div>
 
     <!-- Right side columns -->
     <div class="col-lg-4">

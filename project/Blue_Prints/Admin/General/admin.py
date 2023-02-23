@@ -20,13 +20,11 @@ def admin_home():
 
 @admin.route('/admin/locations')
 def admin_locations():
-    # \admin\locations?__debugger__=yes&cmd=resource&f=console.png
     countries = Country.query.all()
     return render_template('admin/locations/index.html', countries=countries)
 
 
 @admin.route('/admin/therapists')
 def admin_therapists():
-    # \admin\locations?__debugger__=yes&cmd=resource&f=console.png
     countries = Country.query.all()
     return render_template('admin/therapists/admin_therapists.html', countries=countries)
