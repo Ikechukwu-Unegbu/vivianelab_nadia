@@ -26,7 +26,7 @@
                   
               </div>
               <div class="form-group mt-3">
-                <button class="btn btn-primary" id="save-cities">Save </button>
+                <button class="btn btn-primary" type="button" id="save-cities">Save </button>
               </div>
 
           </form>
@@ -80,6 +80,7 @@ stateSelect.addEventListener("change", async function() {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.value = city.id;
+    checkbox.className = 'form-check-input'
     checkbox.id = `city_${city.id}`;
     const label = document.createElement("label");
     label.className = "form-check-label";
@@ -93,14 +94,15 @@ stateSelect.addEventListener("change", async function() {
 </script>
 
 <script>
-    // Get all the checkboxes in the city list
-const checkboxes = document.querySelectorAll('.form-check-input');
 
 // Get the button to save the selected cities
 const saveBtn = document.querySelector('#save-cities');
 
 // Add a click event listener to the save button
 saveBtn.addEventListener('click', function() {
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    console.log(checkboxes)
+    // return false;
   // Initialize an empty array to store the selected city IDs
   const cityIds = [];
 
@@ -111,6 +113,8 @@ saveBtn.addEventListener('click', function() {
       cityIds.push(checkbox.value);
     }
   });
+  
+
 
   // Make an AJAX call to the /add-cities endpoint with the selected city IDs
   fetch('/add-cities', {
@@ -118,16 +122,59 @@ saveBtn.addEventListener('click', function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ cityIds })
+    body: JSON.stringify({ 'city_ids': cityIds })
   })
-  .then(response => {
-    // Handle the response from the server
-    console.log(response);
+  .then(response => response.json())
+  .then(data => {
+    console.log(data); // success message
   })
   .catch(error => {
-    // Handle any errors that occur during the AJAX call
     console.error(error);
   });
+  
 });
+    
+
+
+    //getting id of logged in user 
+    const userId = "{{ current_user.id }}";
+    // Get a reference to the locations_div element
+const locationsDiv = document.getElementById('locations_div');
+// populate the locations_div
+fetch('/get-therapist-cities')
+  .then(response => response.json())
+  .then(data => {
+    const locationsDiv = document.getElementById('locations_div');
+    locationsDiv.innerHTML = '';
+
+    for (const city of data.cities) {
+      const deetDiv = document.createElement('div');
+      deetDiv.classList.add('deet', 'mt-2');
+
+      const keySpan = document.createElement('span');
+      keySpan.classList.add('deet_key');
+      keySpan.innerText = city.name + ': ';
+
+      const buttonSpan = document.createElement('span');
+
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('btn', 'btn-sm');
+      deleteButton.onclick = function() {
+        delete_city(city.id);
+      }
+
+      const deleteIcon = document.createElement('i');
+      deleteIcon.classList.add('fa-solid', 'fa-trash-can');
+
+      deleteButton.appendChild(deleteIcon);
+      buttonSpan.appendChild(deleteButton);
+
+      deetDiv.appendChild(keySpan);
+      deetDiv.appendChild(buttonSpan);
+
+      locationsDiv.appendChild(deetDiv);
+    }
+  })
+  .catch(error => console.log(error));
 
 </script>

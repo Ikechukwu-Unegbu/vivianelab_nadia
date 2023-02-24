@@ -2,6 +2,7 @@ import os
 from flask import Blueprint, render_template, request, redirect, flash, url_for, current_app, send_from_directory, jsonify
 from datetime import datetime
 from ...models.Locations.UserCity import UserCity
+from ...models.Locations.City import City
 from ...Services.Helpers import get_user_type
 from ... import db
 from flask_login import login_required, current_user
@@ -245,3 +246,19 @@ def add_cities():
     db.session.commit()
 
     return jsonify({'success': True}), 200
+
+
+@profile.route('/get-therapist-cities')
+def get_therapist_cities():
+    if current_user.is_authenticated:
+        # Query UserCity model to get all rows where user_id = current user's id and user_model is therapist
+        user_cities = UserCity.query.filter_by(user_id=current_user.id, user_model='therapist').all()
+
+        # Query City model to get the city where id = city_id in each UserCity row
+        cities = [City.query.get(user_city.city_id) for user_city in user_cities]
+
+        # Return list of city names
+        city_data = [{'id': city.id, 'name': city.name} for city in cities]
+        return {'cities': city_data}
+    else:
+        return {'message': 'User not authenticated'}

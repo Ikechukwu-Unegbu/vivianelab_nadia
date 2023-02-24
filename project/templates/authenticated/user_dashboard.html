@@ -1,7 +1,7 @@
 {% extends "layouts/guest.html" %}
 
 {% block styles %}
-  <link rel="stylesheet" href="../../static/css/authenticated_therapist.css">
+  <link rel="stylesheet" href="../../../static/css/authenticated_therapist.css ">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     /* .container{
@@ -26,6 +26,16 @@
     .therapist_search .btn{
       width: 100% !important;
     }
+
+    .therapists{
+      width: 100% !important;
+      height: fit-content;
+      padding: 1rem;
+      /* padding-bottom: 1rem; */
+      box-shadow: 0 0 10px white;
+      background-color: whitesmoke;
+      margin-bottom: 1.2rem;
+    }
   </style>
 {% endblock %}
 
@@ -35,14 +45,31 @@
       <h4 class="text-center text-primary">Hi {{current_user.fullname}}</h4>
       <h5 class="text-center text-dark mt-4 mb-4"> You have No Running Appointments or Running Plans</h5>
     </div>
-    <form action="" class="mt-5 mb-5 therapist_search">
+    <form action="{{url_for('main.search_therapists_by_city')}}" method="GET" class="mt-5 mb-5 therapist_search">
       <div class="form-group">
-        <input type="text" placeholder="search physiotherapists in your city" class="form-control">
+        <input type="text" name="city_name" placeholder="search physiotherapists in your city" class="form-control">
       </div>
       <div class="form-group">
         <button class="btn btn-primary">Search</button>
       </div>
     </form>
-    
+    <!-- result -->
+
+    {% if results is defined and results is not none %}
+      {% if results %}
+        {% for therapist in results %}
+        <div class="therapists">
+          <h4><a href="">{{ therapist.fullname }}</a></h4>
+          <span>{{therapist.tagline}}</span>
+
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No therapists found in the said city.</p>
+      {% endif %}
+    {% endif %}
+
+
+
   </main>
 {% endblock %}
