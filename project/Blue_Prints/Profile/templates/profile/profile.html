@@ -22,7 +22,9 @@
               {% else %}
               <img src="{{ url_for('profile.static', filename='uploads/avatar'+therapist.avatar) }}" class="img pic img-fluid" alt="">
               {% endif %}
+              {% if current_user.id == therapist_id%}
               <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#image-upload-modal" id="pic-btn"><i class="fa-solid fa-camera"></i></button>
+              {% endif %}
               <h5 class=" mt-2">{{therapist.fullname}}</h5>
               <small><b>
                 {% if therapist.tagline == None %}
@@ -54,7 +56,9 @@
             <div class="mt-5 ">
               <div class="location-heading">
                 <h5 class="">Locations</h5>
+                {% if current_user.id == therapist_id%}
                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#locate"><i class="fa-solid fa-pen"></i></button>
+                {% endif %}
               </div>
               
               <div class="locations_div" id="locations_div">
@@ -97,7 +101,9 @@
           <div class="">
             <div class="bio_title">
                 <h3>Bio</h3>
+                {% if current_user.id == therapist_id %}
                 <button class="btn btn-sm"  data-bs-toggle="modal" data-bs-target="#bio-edit"><i class="fa-solid fa-pen"></i></button>
+                {% endif %}
                 {% include "profile/_bio_modal.html" %}
                 {% include "profile/_image_modal.html" %}
             </div>
@@ -138,7 +144,9 @@
           <div class="educaction mb-3">
             <div class="bio_title">
                 <h3>Work History</h3>
+                {% if current_user.id == therapist_id %}
                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#work-add"><i class="fa-solid fa-pen"></i></button>
+                {% endif %}
                 {% include "profile/_work_modal.html" %}
             </div>
             {% for emps in work %}
@@ -146,12 +154,14 @@
               <div class="edu-heading">
                 <h5 class="">{{emps.employer}} - <span>2014 - 2021</span></h5>
                 <div class="edu-heading-actions">
+                  {% if therapist_id == current_user.id %}
                   <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#work-edit-{{emps.id}}">
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
                   <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#work-delete-{{emps.id}}">
                     <i class="fa-solid fa-trash-can"></i>
                   </button>
+                  {% endif %}
                 </div>
               </div>
               <span><small>{{emps.jobrole}}</small></span>
@@ -174,7 +184,10 @@
           <div class="educaction mb-5">
             <div class="bio_title mt-4">
                 <h3>Education</h3>
+                {% if current_user.id == therapist_id %}
                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#edu-add"><i class="fa-solid fa-pen"></i></button>
+                {% endif %}
+                
                 {% include "profile/_education_modal.html" %}
             </div>
             {% for education in edu %}
@@ -183,12 +196,14 @@
               <div class="edu-heading">
                 <h5 class="">{{education.school}} - <span>2014 - 2021</span></h5>
                 <div class="edu-heading-actions">
+                 {% if therapist_id == current_user.id%} 
                   <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#education-edit-{{education.id}}">
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
                   <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#education-delete-{{education.id}}">
                     <i class="fa-solid fa-trash-can"></i>
                   </button>
+                 {% endif %}
                 </div>
               </div>
               <span><small>{{education.course}}</small></span>
@@ -256,5 +271,5 @@
 
 </script>
 {% include "profile/_location_modal.html" %}
-
+{% include "profile/_" %}
 {% endblock %}

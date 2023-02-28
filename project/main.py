@@ -30,20 +30,26 @@ def dashboard():
 
 
 @main.route('/search-therapists/', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def search_therapists_by_city():
-    # city_name = request.form['city_name']
+    """
+        This endpoint handles user/patient search for therapists accross cities
+    """
+    # get search term - city name
     city_name = request.args.get('city_name')
+    # search the for such cities
     searched_cities = City.query.filter(City.name.like(f"%{city_name}%")).all()
-    # searched_cities = City.query.filter(City.name.like(f"%{city_name}%")).all()
+    #If there are such cities - make array of their id
     if searched_cities:
         city_ids = [city.id for city in searched_cities]
         therapist_ids = []
+        # get Id of therapists in those cities and save them in therapist_ids list
         for city_id in city_ids:
             city_users = UserCity.query.filter_by(city_id=city_id, user_model="therapist").all()
             therapist_ids += [city_user.user_id for city_user in city_users]
 
         if therapist_ids:
+            # get profile of theses therapists
             therapists = Therapist.query.filter(Therapist.id.in_(therapist_ids)).all()
         else:
             therapists = []
@@ -51,3 +57,8 @@ def search_therapists_by_city():
     else:
         results = None
     return render_template('authenticated/user_dashboard.html', results=results, cities=searched_cities, c_u=city_users,thera_id=therapist_ids)
+
+
+# @main.route('/therapist/<int:id>')
+# def pub_therapist_profile(id):
+#     return render_template('')

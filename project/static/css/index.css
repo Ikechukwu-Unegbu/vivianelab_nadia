@@ -1,0 +1,23 @@
+.hero{
+    background-image: url('https://media.istockphoto.com/id/1321089024/photo/doctors-do-it-for-the-health-of-it.jpg?s=1024x1024&w=is&k=20&c=JEk_kEhPjGGCSb0qX634hwvKIen9mZSkFPZ6iFKcr_A=');
+    height: 80vh;
+
+}
+
+.hero .text-dark{
+    box-shadow: 0 0 8px gray;
+    padding: 0.5rem;
+}
+
+.info-1{
+    background-image: url('https://media.istockphoto.com/id/1139755582/photo/medical-equipment-on-the-background-of-group-of-health-workers-in-the-icu.jpg?s=1024x1024&w=is&k=20&c=7jrK90aF8uHKWkG1IP_VRB5KbkszzERurwqFCdc5dbQ=');
+}
+
+.info-1 p{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.info-1 .info-2{
+    box-shadow: 0 0 20px gray !important;
+}

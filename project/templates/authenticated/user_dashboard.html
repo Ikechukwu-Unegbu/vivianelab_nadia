@@ -35,6 +35,17 @@
       box-shadow: 0 0 10px white;
       background-color: whitesmoke;
       margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: row;
+      grid-gap: 1.4rem;
+    }
+    .therapists a{
+      text-decoration: none;
+    }
+    .therapists img{
+      height: 5rem;
+      width: 5rem;
+      border-radius: 50% !important;
     }
   </style>
 {% endblock %}
@@ -59,9 +70,17 @@
       {% if results %}
         {% for therapist in results %}
         <div class="therapists">
-          <h4><a href="">{{ therapist.fullname }}</a></h4>
-          <span>{{therapist.tagline}}</span>
+          {% if therapist.avatar != None%}
+          <img src="{{ url_for('profile.static', filename='uploads/avatar'+therapist.avatar) }}" alt="">
+          {% else %}
+          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="">
+          {% endif %}
+          <div>
+            <h4><a href="">{{ therapist.fullname }}</a></h4>
+            <span>{{therapist.tagline}}</span>
+           
 
+          </div>
         </div>
         {% endfor %}
         {% else %}

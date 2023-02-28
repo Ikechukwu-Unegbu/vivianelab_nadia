@@ -39,7 +39,7 @@ def myprofile():
     work = Work.query.filter_by(therapist_id=current_user.id).all()
     country = Country.query.all()
 
-    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu, country=country)
+    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu, country=country, therapist_id=current_user.id)
 
 
 
@@ -262,3 +262,17 @@ def get_therapist_cities():
         return {'cities': city_data}
     else:
         return {'message': 'User not authenticated'}
+    
+
+
+@profile.route('/therapist/<int:id>')
+def pub_therapist_profile(id):
+   # make sure that given id is same as auth user id
+
+    therapist = Therapist.query.filter_by(id=id).first()
+    edu = Education.query.filter_by(therapist_id=id).all()
+    work = Work.query.filter_by(therapist_id=id).all()
+    country = Country.query.all()
+
+    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu, country=country, therapist_id=id)
+

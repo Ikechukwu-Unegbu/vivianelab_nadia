@@ -2,6 +2,7 @@
 <table id="therapists_table" class="table table-striped" style="width:100%">
     <thead>
         <tr>
+            <th>Id</th>
             <th>Name</th>
             <th>phone</th>
             <th>email</th>
@@ -13,6 +14,7 @@
     <tbody>
         {% for therapist in therapists %}
         <tr>
+            <td>{{therapist.id}}</td>
             <td>{{therapist.fullname}}</td>
             <td>{{therapist.phone}}</td>
             <td>{{therapist.email}}</td>
