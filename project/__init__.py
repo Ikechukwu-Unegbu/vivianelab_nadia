@@ -24,8 +24,6 @@ def create_app():
 
 
     from .models.User import User
-    from .models.Therapist import Therapist
-
 
      # @login_manager.user_loader
     # def load_user(user_id):
@@ -39,12 +37,6 @@ def create_app():
         user = User.query.get(int(user_id))
         if user is not None:
             return user
-
-        # If not found, try to find the user in the Therapist model
-        therapist = Therapist.query.get(int(user_id))
-        if therapist is not None:
-            return therapist
-
         # If still not found, return None
         return None
 
@@ -57,7 +49,7 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    # profile blue prints
+    # # profile blue prints
     from .Blue_Prints.Profile.profile import profile as profile_bluepring
     app.register_blueprint(profile_bluepring)
 
@@ -67,14 +59,13 @@ def create_app():
     from .Blue_Prints.Settings.settings import settings as settings_blueprint
     app.register_blueprint(settings_blueprint)
     
-    from .Blue_Prints.Appointment.appointment import appointment as appointment_blueprint
-    app.register_blueprint(appointment_blueprint)
+
 
     from .Blue_Prints.Admin.General.admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint)
 
-    from .Blue_Prints.Admin.Location.admin_location import admin_location as admin_location_blueprint
-    app.register_blueprint(admin_location_blueprint)
+    # from .Blue_Prints.Admin.Location.admin_location import admin_location as admin_location_blueprint
+    # app.register_blueprint(admin_location_blueprint)
 
 
     return app

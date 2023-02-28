@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, redirect, flash
-from ....models.Therapist import Therapist
 from ....models.User import User
 from ....models.Locations.Country import Country
 from flask_login import login_required, current_user
@@ -14,7 +13,7 @@ def admin_home():
         This endpoint renders admin homepage.
     """
     countries = Country.query.all()
-    therapists = Therapist.query.all()
+    therapists = User.query.all()
     users = User.query.all()
     return render_template('admin/home/home.html', therapists=therapists, users=users, countries=countries)
 

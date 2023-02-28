@@ -6,7 +6,7 @@ from ...models.Locations.City import City
 from ...Services.Helpers import get_user_type
 from ... import db
 from flask_login import login_required, current_user
-from ...models.Therapist import Therapist
+
 from ...Services.Helpers import get_user_type
 # from .Services.Helpers import get_user_type
 # from .models.Therapist import Therapist

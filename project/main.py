@@ -2,19 +2,20 @@ from flask import Blueprint, render_template, request, redirect
 from . import db
 from flask_login import login_required, current_user
 from .Services.Helpers import get_user_type
-from .models.Therapist import Therapist
+
 from .models.User import User
 from .models.Locations.City import City
 from .models.Locations.UserCity import UserCity
+
+import random
+from sqlalchemy import func
 
 main = Blueprint('main', __name__, static_folder='static', static_url_path="/static")
 
 @main.route('/')
 def index():
-    theras = Therapist.query.limit(4).all()
-    if len(theras) < 4:
-        theras = Therapist.query.all()
-        # return therapists  
+    theras =  User.query.filter_by(access='therapist').order_by(func.random()).limit(5).all()
+    
     return render_template('home.html', theras=theras)
 
 @main.route('/dashboard')
