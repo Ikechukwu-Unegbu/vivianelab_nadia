@@ -14,6 +14,7 @@ from ...models.User import User
 from ...models.Work import Work 
 from ...models.Locations.Country import Country
 from ...models.Education import Education
+# from ...Services.Helpers ImportWarning
 
 from jinja2 import Environment
 
@@ -33,6 +34,8 @@ def uploaded_file():
 @login_required
 def myprofile():
     # make sure that given id is same as auth user id
+    if get_user_type(current_user) == 'user':
+        return redirect(url_for('main.dashboard'))
 
     therapist = Therapist.query.filter_by(id=current_user.id).first()
     edu = Education.query.filter_by(therapist_id=current_user.id).all()
@@ -248,11 +251,11 @@ def add_cities():
     return jsonify({'success': True}), 200
 
 
-@profile.route('/get-therapist-cities')
-def get_therapist_cities():
+@profile.route('/get-therapist-cities/<int:id>')
+def get_therapist_cities(id):
     if current_user.is_authenticated:
         # Query UserCity model to get all rows where user_id = current user's id and user_model is therapist
-        user_cities = UserCity.query.filter_by(user_id=current_user.id, user_model='therapist').all()
+        user_cities = UserCity.query.filter_by(user_id=id, user_model='therapist').all()
 
         # Query City model to get the city where id = city_id in each UserCity row
         cities = [City.query.get(user_city.city_id) for user_city in user_cities]
@@ -271,8 +274,20 @@ def pub_therapist_profile(id):
 
     therapist = Therapist.query.filter_by(id=id).first()
     edu = Education.query.filter_by(therapist_id=id).all()
+    # location = UserCity.query.filter_by(therapist_id=id).all()
     work = Work.query.filter_by(therapist_id=id).all()
     country = Country.query.all()
 
-    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu, country=country, therapist_id=id)
+
+     # Query UserCity model to get all rows where user_id = current user's id and user_model is therapist
+    user_cities = UserCity.query.filter_by(user_id=id, user_model='therapist').all()
+
+    # Query City model to get the city where id = city_id in each UserCity row
+    cities = [City.query.get(user_city.city_id) for user_city in user_cities]
+
+    # Return list of city names
+    city_data = [{'id': city.id, 'name': city.name} for city in cities]
+
+    return render_template('/profile/profile.html', therapist=therapist, work=work, edu=edu, country=country, therapist_id=id, cities=city_data)
+
 

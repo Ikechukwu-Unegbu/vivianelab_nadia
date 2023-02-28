@@ -137,11 +137,11 @@ saveBtn.addEventListener('click', function() {
 
 
     //getting id of logged in user 
-    const userId = "{{ current_user.id }}";
+const userId = "{{ therapist.id }}";
     // Get a reference to the locations_div element
 const locationsDiv = document.getElementById('locations_div');
 // populate the locations_div
-fetch('/get-therapist-cities')
+fetch('/get-therapist-cities/'+userId)
   .then(response => response.json())
   .then(data => {
     const locationsDiv = document.getElementById('locations_div');

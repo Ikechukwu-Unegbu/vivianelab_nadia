@@ -35,11 +35,13 @@
               </b></small>
             </div>
            
+            {% if current_user.__table__.name == 'user'%}
             <div class="mt-3 mb-3 booking-div">
               <button class="btn btn-default btn-secondary">Review</button>
-              <button class="btn btn-primary">Book Now</button>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#book">Book Now</button>
             </div>
-     
+            {% endif %}
+
             <!-- language -->
             <div class="">
               <h5 class="">Languages</h5>
@@ -55,8 +57,8 @@
             </div>
             <div class="mt-5 ">
               <div class="location-heading">
-                <h5 class="">Locations</h5>
-                {% if current_user.id == therapist_id%}
+                <h5 class="">Location</h5>
+                {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#locate"><i class="fa-solid fa-pen"></i></button>
                 {% endif %}
               </div>
@@ -64,11 +66,19 @@
               <div class="locations_div" id="locations_div">
                 <div class="deet mt-2">
                   <span class="deet_key">English: </span>
-                  <span><button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button></span>
+                  <span>
+                    {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
+                    <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                    {% endif %}
+                  </span>
                 </div>
                 <div class="deet mt-2">
                   <span class="deet_key">English: </span>
-                  <span><button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button></span>
+                  <span>
+                    {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
+                    <button class="btn btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                    {% endif %}
+                  </span>
                 </div>
               </div>
      
@@ -101,8 +111,9 @@
           <div class="">
             <div class="bio_title">
                 <h3>Bio</h3>
-                {% if current_user.id == therapist_id %}
-                <button class="btn btn-sm"  data-bs-toggle="modal" data-bs-target="#bio-edit"><i class="fa-solid fa-pen"></i></button>
+               
+                 {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
+                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#bio-edit"><i class="fa-solid fa-pen"></i></button>
                 {% endif %}
                 {% include "profile/_bio_modal.html" %}
                 {% include "profile/_image_modal.html" %}
@@ -144,7 +155,7 @@
           <div class="educaction mb-3">
             <div class="bio_title">
                 <h3>Work History</h3>
-                {% if current_user.id == therapist_id %}
+                 {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#work-add"><i class="fa-solid fa-pen"></i></button>
                 {% endif %}
                 {% include "profile/_work_modal.html" %}
@@ -154,7 +165,7 @@
               <div class="edu-heading">
                 <h5 class="">{{emps.employer}} - <span>2014 - 2021</span></h5>
                 <div class="edu-heading-actions">
-                  {% if therapist_id == current_user.id %}
+                   {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
                   <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#work-edit-{{emps.id}}">
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
@@ -184,7 +195,7 @@
           <div class="educaction mb-5">
             <div class="bio_title mt-4">
                 <h3>Education</h3>
-                {% if current_user.id == therapist_id %}
+                {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#edu-add"><i class="fa-solid fa-pen"></i></button>
                 {% endif %}
                 
@@ -196,7 +207,7 @@
               <div class="edu-heading">
                 <h5 class="">{{education.school}} - <span>2014 - 2021</span></h5>
                 <div class="edu-heading-actions">
-                 {% if therapist_id == current_user.id%} 
+                   {% if current_user.__table__.name == 'therapist' and current_user.id == therapist.id %}
                   <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#education-edit-{{education.id}}">
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
@@ -271,5 +282,7 @@
 
 </script>
 {% include "profile/_location_modal.html" %}
-{% include "profile/_" %}
+{% if therapist_id != current_user.id %}
+{% include "profile/_book_modal.html" %}
+{% endif %}
 {% endblock %}
