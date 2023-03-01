@@ -54,7 +54,12 @@
   <main class="container mt-5">
     <div class="mt-5 mb-5">
       <h4 class="text-center text-primary">Hi {{current_user.fullname}}</h4>
-      <h5 class="text-center text-dark mt-4 mb-4"> You have No Running Appointments or Running Plans</h5>
+      {% if appointments|length == 0 %}
+        <h5 class="text-center text-dark mt-4 mb-4"> You have No Running Appointments or Running Plans</h5>
+      {% else %}
+        <h5 class="text-center text-secondary mt-4 mb-4 ">There are {{ appointments|length }} upcoming appointments.</h5>
+      {% endif %}
+      
     </div>
     <form action="{{url_for('main.search_therapists_by_city')}}" method="GET" class="mt-5 mb-5 therapist_search">
       <div class="form-group">

@@ -36,7 +36,15 @@ def create_app():
             return user
         # If still not found, return None
         return None
-
+    
+    @app.context_processor
+    def inject_notification():
+        if current_user.is_authenticated:
+            from .models.Notification import Notification
+            notifications = Notification.query.filter_by(user_id=current_user.id).all()
+        else:
+            notifications = []
+        return dict(notifications=notifications)
 
     # blueprint for auth routes in our app
     from .auth import auth as auth_blueprint

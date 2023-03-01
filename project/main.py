@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect
 from . import db
+from datetime import datetime
 from flask_login import login_required, current_user
 from .Services.Helpers import get_user_type
 from .models.Appointment import Appointment
@@ -24,11 +25,15 @@ def dashboard():
     
     # user_type = get_user_type(current_user)
     results = None
-    appointments = Appointment.query.all()
+    future_appointments = Appointment.query.filter(
+        Appointment.session_date > datetime.now().date(),
+        Appointment.user_id == current_user.id
+    ).order_by(Appointment.session_date).limit(10).all()
+
     if current_user.access == 'user' or current_user.access == "USER":
-        return render_template('authenticated/user_dashboard.html', results=results, appointments=appointments)
+        return render_template('authenticated/user_dashboard.html', results=results, appointments=future_appointments)
     if current_user.access == 'therapist' or current_user.access =="THERAPIST":
-        return render_template('authenticated/therapist_dashboard.html', results=results, appointments=appointments)
+        return render_template('authenticated/therapist_dashboard.html', results=results, appointments=future_appointments)
 
 
 @main.route('/search-therapists/', methods=['POST', 'GET'])
@@ -61,6 +66,6 @@ def search_therapists_by_city():
     return render_template('authenticated/user_dashboard.html', results=results, cities=searched_cities, c_u=city_users,thera_id=therapist_ids)
 
 
-# @main.route('/therapist/<int:id>')
-# def pub_therapist_profile(id):
-#     return render_template('')
+@main.route('/notifications')
+def notifications():
+    return render_template('pages/notifications/notifications.html')

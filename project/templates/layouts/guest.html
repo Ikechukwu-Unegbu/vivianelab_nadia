@@ -30,10 +30,10 @@
                 <a href="" class="nav-link"><i class="fa-solid fa-comments"></i></a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link position-relative">
+                <a href="{{url_for('main.notifications')}}" class="nav-link position-relative">
                   <i class="fa-solid fa-bell"></i>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    99+
+                    {{ notifications|length}}
                     <span class="visually-hidden">unread messages</span>
                   </span>
                 </a>

@@ -29,8 +29,10 @@ def book_appointment():
     city = request.form.get('city')
     address = request.form.get('address')
     description = request.form.get('description')
+    session_date = request.form.get('session_date')
+    arrive_user_dt = datetime.strptime(session_date, '%Y-%m-%d')
 
-    appointment = Appointment(therapist_id=therapist_id, location_id=city, address=address, description=description)
+    appointment = Appointment(therapist_id=therapist_id,user_id=current_user.id, location_id=city, address=address, description=description,session_date=arrive_user_dt )
 
     # add the appointment to the database and commit the transaction
     db.session.add(appointment)
