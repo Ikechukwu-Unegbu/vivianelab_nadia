@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect
 from . import db
 from flask_login import login_required, current_user
 from .Services.Helpers import get_user_type
-
+from .models.Appointment import Appointment
 from .models.User import User
 from .models.Locations.City import City
 from .models.Locations.UserCity import UserCity
@@ -24,10 +24,11 @@ def dashboard():
     
     # user_type = get_user_type(current_user)
     results = None
+    appointments = Appointment.query.all()
     if current_user.access == 'user' or current_user.access == "USER":
-        return render_template('authenticated/user_dashboard.html', results=results)
+        return render_template('authenticated/user_dashboard.html', results=results, appointments=appointments)
     if current_user.access == 'therapist' or current_user.access =="THERAPIST":
-        return render_template('authenticated/therapist_dashboard.html', results=results)
+        return render_template('authenticated/therapist_dashboard.html', results=results, appointments=appointments)
 
 
 @main.route('/search-therapists/', methods=['POST', 'GET'])

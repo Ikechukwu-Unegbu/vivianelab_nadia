@@ -1,14 +1,9 @@
-from project.models.Therapist import Therapist
-from flask_migrate import Migrate
-from project import db
-from project import create_app
+from flask import current_app
+from project.models.Appointment import add_created_at_column_to_appointment_model
 
-app = create_app()
+add_created_at_column_to_appointment_model()
 
-migrate = Migrate(app, db)
-
-with app.app_context():
-    result = Therapist.add_column()
-
-
-print(result)
+with current_app.app_context():
+    add_created_at_column_to_appointment_model()
+    current_app.run()
+    
