@@ -1,7 +1,7 @@
 {% extends "layouts/auth.html" %}
 
 {% block content %}
-<form method="POST" action="/user/signup">
+<form method="POST" action="/signup">
     <img class="mb-4" src="../../static/pub_imges/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please Sign up</h1>
     <div class="form-floating">
@@ -12,13 +12,13 @@
         <input type="text" class="form-control" name="fullname" id="floatingInput" placeholder="Kingsley Emeka">
         <label for="floatingInput">Full Name</label>
       </div>
-      <!-- <div class="form-floating">
-        <select name="usertype" id="" class="form-control">
-          <option value="pat">Patient</option>
-          <option value="therapist">Therapist</option>
+      <div class="form-floating">
+        <select name="access" id="" class="form-control">
+          <option value="USER">User</option>
+          <option value="THERAPIST">Therapist</option>
         </select>
         <label for="floatingInput">User Type</label>
-      </div> -->
+      </div>
       <div class="form-floating">
         <input type="text" class="form-control" name="phone" id="floatingInput" placeholder="+234890..">
         <label for="floatingInput">Phone</label>

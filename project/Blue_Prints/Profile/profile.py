@@ -34,10 +34,10 @@ def uploaded_file():
 @login_required
 def myprofile():
     # make sure that given id is same as auth user id
-    if get_user_type(current_user) == 'user':
+    if current_user.access == 'user' or current_user.access == 'USER':
         return redirect(url_for('main.dashboard'))
 
-    therapist = Therapist.query.filter_by(id=current_user.id).first()
+    therapist = User.query.filter_by(id=current_user.id).first()
     edu = Education.query.filter_by(therapist_id=current_user.id).all()
     work = Work.query.filter_by(therapist_id=current_user.id).all()
     country = Country.query.all()
@@ -50,7 +50,7 @@ def myprofile():
 @login_required
 def update_bio_tagline():
     # Query the therapist with the given id
-    therapist = Therapist.query.filter_by(id=current_user.id).first()
+    therapist = User.query.filter_by(id=current_user.id).first()
 
     # Update the therapist's tagline and bio
     therapist.tagline = request.form.get('tagline')
@@ -80,7 +80,7 @@ def upload_avatar():
             filename = file.filename
             file.save(os.path.join(profile.static_folder, 'uploads/avatar'+filename))
             #saving file to database 
-            therapist = Therapist.query.filter_by(id=current_user.id).first()
+            therapist = User.query.filter_by(id=current_user.id).first()
             therapist.avatar = filename
 
             # Commit the changes to the database
@@ -240,10 +240,9 @@ def add_cities():
     # get the submitted city IDs as an array
     city_ids = request.json.get('city_ids')
     # get the model of the logged-in user
-    user_model = get_user_type(current_user)
     # add each city ID as a record in the UserCity model for the logged-in user
     for city_id in city_ids:
-        user_city = UserCity(user_id=current_user.id, city_id=city_id, user_model=user_model, created_at=datetime.now())
+        user_city = UserCity(user_id=current_user.id, city_id=city_id, user_model='user', created_at=datetime.now())
         db.session.add(user_city)
 
     db.session.commit()
@@ -255,7 +254,7 @@ def add_cities():
 def get_therapist_cities(id):
     if current_user.is_authenticated:
         # Query UserCity model to get all rows where user_id = current user's id and user_model is therapist
-        user_cities = UserCity.query.filter_by(user_id=id, user_model='therapist').all()
+        user_cities = UserCity.query.filter_by(user_id=id).all()
 
         # Query City model to get the city where id = city_id in each UserCity row
         cities = [City.query.get(user_city.city_id) for user_city in user_cities]
@@ -272,7 +271,7 @@ def get_therapist_cities(id):
 def pub_therapist_profile(id):
    # make sure that given id is same as auth user id
 
-    therapist = Therapist.query.filter_by(id=id).first()
+    therapist = User.query.filter_by(id=id).first()
     edu = Education.query.filter_by(therapist_id=id).all()
     # location = UserCity.query.filter_by(therapist_id=id).all()
     work = Work.query.filter_by(therapist_id=id).all()
@@ -280,7 +279,7 @@ def pub_therapist_profile(id):
 
 
      # Query UserCity model to get all rows where user_id = current user's id and user_model is therapist
-    user_cities = UserCity.query.filter_by(user_id=id, user_model='therapist').all()
+    user_cities = UserCity.query.filter_by(user_id=id).all()
 
     # Query City model to get the city where id = city_id in each UserCity row
     cities = [City.query.get(user_city.city_id) for user_city in user_cities]

@@ -26,7 +26,7 @@ class User(UserMixin, db.Model):
     fullname = db.Column(db.String(200))
     phone = db.Column(db.String(100))
     gender = db.Column(db.Enum(GenderEnum), nullable=True)
-    access = db.Column(db.Enum(AccessEnum), nullable=True)
+    access = db.Column(db.String(200), nullable=True, default='user')
     age = db.Column(db.Integer, nullable=True)
     city_id = db.Column(db.Integer, nullable=True)
     avatar = db.Column(db.String(200), nullable=True)

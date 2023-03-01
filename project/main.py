@@ -21,12 +21,12 @@ def index():
 @main.route('/dashboard')
 @login_required
 def dashboard():
-    print(current_user)
-    user_type = get_user_type(current_user)
+    
+    # user_type = get_user_type(current_user)
     results = None
-    if user_type == 'user':
+    if current_user.access == 'user' or current_user.access == "USER":
         return render_template('authenticated/user_dashboard.html', results=results)
-    if user_type == 'therapist':
+    if current_user.access == 'therapist' or current_user.access =="THERAPIST":
         return render_template('authenticated/therapist_dashboard.html', results=results)
 
 
@@ -46,12 +46,12 @@ def search_therapists_by_city():
         therapist_ids = []
         # get Id of therapists in those cities and save them in therapist_ids list
         for city_id in city_ids:
-            city_users = UserCity.query.filter_by(city_id=city_id, user_model="therapist").all()
+            city_users = UserCity.query.filter_by(city_id=city_id).all()
             therapist_ids += [city_user.user_id for city_user in city_users]
 
         if therapist_ids:
             # get profile of theses therapists
-            therapists = Therapist.query.filter(Therapist.id.in_(therapist_ids)).all()
+            therapists = User.query.filter(User.id.in_(therapist_ids)).all()
         else:
             therapists = []
         results = therapists
