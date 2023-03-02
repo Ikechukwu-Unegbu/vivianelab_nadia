@@ -4,6 +4,16 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('settings.static', filename='css/settings.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Fake Title</title>
+    <style>
+      .deet{
+        display: flex;
+        flex-direction: row;
+        grid-gap: 1.4rem;
+      }
+      .key{
+        font-weight: bolder;
+      }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -11,38 +21,44 @@
 <main class="container">
     <h4 class="text-center text-dark mt-4 mb-4">Appointment Table</h4>
     <div class="table-responsive">
+
         <table class="table">
             <thead>
                 <!-- <h5 class="text-center text-dark">App</h5> -->
             </thead>
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                <th scope="col">Id</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Created</th>
+                <th>Scheduled for</th>
                 <th scope="col">Handle</th>
               </tr>
             </thead>
             <tbody>
+              {% for appointment in appointments.items  %}
               <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>{{appointment.user.fullname}}</td>
+                <td>{{appointment.created_at.strftime('%B %d, %Y, %I:%M %p')}}</td>
+                <td>{{appointment.session_date.strftime('%B %d, %Y, %I:%M %p')}}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#deet-{{appointment.id}}">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#respond-{{appointment.id}}">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </button>
+                </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              {% include "medic/includes/_appointment_deets.html"%}
+              {% include "medic/includes/_accept_cancel.html"  %}
+              {% endfor%}
             </tbody>
           </table>
+          <div>
+            {{appointments.links}}
+          </div>
     </div>
 
 </main>

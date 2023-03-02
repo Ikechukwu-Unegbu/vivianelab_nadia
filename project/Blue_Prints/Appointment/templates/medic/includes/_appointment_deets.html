@@ -1,0 +1,51 @@
+
+  <!-- Modal -->
+  <div class="modal fade" id="deet-{{appointment.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Appointment | {{appointment.user.fullname}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+       
+        <div class="modal-body">
+            <div class="appointment-actions">
+                <button class="btn btn-sm btn-primary">Accept</button>
+                <button class="btn btn-sm btn-danger">Cancel</button>
+            </div>
+            <div class="appointment-full">
+                <div class="deet mt-3">
+                    <span class="key">Patient Name: </span>
+                    <span>{{appointment.user.fullname}}</span>
+                </div>
+                <div class="deet mt-3">
+                    <span class="key">Address: </span>
+                    <span>{{appointment.address}}</span>
+                </div>
+                <div class="deet mt-3">
+                    <span class="key">Location: </span>
+                    <span id="city">Lagos</span>
+                </div>
+                <div class="deet mt-3">
+                    <span class="key">Arrival: </span>
+                    <span>{{appointment.arrive_therapist}}</span>
+                </div>
+                <div class="deet mt-3">
+                    <span class="key">Completed: </span>
+                    <span>{{appointment.done_therapist}}</span>
+                </div>
+                <div class="description">
+                    <b>Description</b>
+                    <div class="">
+                        {{appointment.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div> -->
+      </div>
+    </div>
+  </div>

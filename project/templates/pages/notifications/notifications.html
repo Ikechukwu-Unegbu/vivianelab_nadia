@@ -51,18 +51,21 @@
                 <a href="">Unread</a>
             </div>
             <div class="not">
-                <div class="card">
-                    <div class="card-body">
-                        <img class="img img-fluid" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="">
-                        <h6 class="text-left text-primary">Sochi Ma sent a session booking request.</h6>
+               {% for notification in notifications %}
+               <div class="card mt-2">
+                <div class="card-body">
+                    <img class="img img-fluid" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="">
+                    <div>
+                        <h6 class="text-left text-primary">{{notification.message}}</h6>
+                        <small>{{notification.created_at.strftime('%B %d, %Y, %I:%M %p')}}</small>
                     </div>
                 </div>
-                <div class="card mt-2">
-                    <div class="card-body">
-                        <img class="img img-fluid" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="">
-                        <h6 class="text-left text-primary">Atiku cancelled his appointment.</h6>
-                    </div>
                 </div>
+               {% endfor %}
+
+               <div class="">
+                {{notifications.links}}
+               </div>
             </div>
         </div>
     </main>

@@ -16,11 +16,22 @@ appointment = Blueprint('appointment', __name__, template_folder='templates', st
 
 @appointment.route('/medic/appointments')
 def medic_appointments():
-    # Appointment.add_created_at_column_to_appointment_model
-    return render_template('/medic/appointments.html')
+    page = request.args.get('page', 1, type=int)
+    appointments = Appointment.query.join(User, Appointment.user_id == User.id). \
+                  filter(Appointment.therapist_id == current_user.id). \
+                  paginate(page=page, per_page=10)
+    
+    # Add user object to each appointment
+    for appointment in appointments.items:
+        appointment.user = User.query.get(appointment.user_id)
+
+
+    return render_template('/medic/appointments.html', appointments=appointments)
+
 
 @appointment.route('/medic/appointment/<string:username>')
 def medic_single_appointment():
+
     return render_template('/medic/appointments.html')
 
 @appointment.route('/appoint', methods=["POST"])

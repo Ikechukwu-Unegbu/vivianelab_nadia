@@ -19,7 +19,7 @@ class Appointment(db.Model):
     cancel_by =  db.Column(db.Integer,nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     session_date = db.Column(db.DateTime, nullable=True)
-
+    # user = db.relationship('User', backref='appointments')
     
     # @classmethod
     # def add_created_at_column_to_appointment_model():

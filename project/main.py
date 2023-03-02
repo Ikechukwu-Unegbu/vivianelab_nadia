@@ -7,6 +7,7 @@ from .models.Appointment import Appointment
 from .models.User import User
 from .models.Locations.City import City
 from .models.Locations.UserCity import UserCity
+from .models.Notification import Notification
 
 import random
 from sqlalchemy import func
@@ -68,4 +69,10 @@ def search_therapists_by_city():
 
 @main.route('/notifications')
 def notifications():
+    # get all his notifications and mark them as read.
+    # notifications = Notification.query.filter_by(user_id=current_user.id, is_read=False).all()
+    # for notification in notifications:
+    #     notification.is_read = True
+    #     db.session.commit()
+
     return render_template('pages/notifications/notifications.html')
