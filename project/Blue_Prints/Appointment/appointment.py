@@ -29,6 +29,57 @@ def medic_appointments():
     return render_template('/medic/appointments.html', appointments=appointments)
 
 
+@appointment.route('/user/appointments')
+def patient_appointments():
+    page = request.args.get('page', 1, type=int)
+    appointments = Appointment.query.join(User, Appointment.user_id == User.id). \
+                  filter(Appointment.user_id == current_user.id). \
+                  paginate(page=page, per_page=10)
+    
+    # Add user object to each appointment
+    for appointment in appointments.items:
+        appointment.therapist = User.query.get(appointment.therapist_id)
+
+    return render_template('/patient/user_appointments.html', appointments=appointments)
+
+
+
+@appointment.route('/appointment/<string:action>/<int:id>')
+def appointment_action_toggle(action,id):
+    appointment = Appointment.query.get(id)
+
+    if action == "accept": 
+        # accept but since cancel is true by default.... lets notify the user of acceptance.
+        # Create a new notification object
+        notification = Notification(
+            user_id=appointment.user_id,  # set the user_id
+            message="Medic accepted your appointment",  # set the message
+            created_at=datetime.utcnow(),  # set the current timestamp
+            is_read=False  # set is_read to False by default
+        )
+        # Add the notification object to the session and commit
+        db.session.add(notification)
+        db.session.commit()
+        flash_message = "You have accepted this appointment."
+    if action == "cancel":
+        appointment.cancel_by = current_user.id
+        db.session.add(appointment)
+        db.session.commit()
+        notification = Notification(
+            user_id=appointment.user_id,  # set the user_id
+            message="Medic declined your appointment",  # set the message
+            created_at=datetime.utcnow(),  # set the current timestamp
+            is_read=False  # set is_read to False by default
+        )
+        # Add the notification object to the session and commit
+        db.session.add(notification)
+        db.session.commit()
+        flash_message = "You have successfully declined this appointment"
+
+    flash(flash_message)
+    return redirect(request.referrer)
+
+
 @appointment.route('/medic/appointment/<string:username>')
 def medic_single_appointment():
 
@@ -53,3 +104,4 @@ def book_appointment():
     db.session.add(notification)
     db.session.commit()
     return redirect(url_for('main.dashboard'))
+

@@ -44,7 +44,16 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Profile</a></li>
-                  <li><a class="dropdown-item" href="{{url_for('appointment.medic_appointments')}}">Appointment</a></li>
+                  {% if current_user.is_authenticated %}
+                    {% if current_user.access == "user" or current_user.access == 'USER' %}
+                       <li><a class="dropdown-item" href="{{url_for('appointment.patient_appointments')}}">Appointment</a></li>
+                    {% endif %}
+                    {% if current_user.access == "therapist" or current_user.access == 'THERAPIST' %}
+                        <li><a class="dropdown-item" href="{{url_for('appointment.medic_appointments')}}">Appointment</a></li>
+                    {% endif %}
+                  {% endif %}
+      
+    
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                 </ul>

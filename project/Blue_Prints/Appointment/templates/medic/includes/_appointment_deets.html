@@ -10,7 +10,7 @@
        
         <div class="modal-body">
             <div class="appointment-actions">
-                <button class="btn btn-sm btn-primary">Accept</button>
+                <a href="{{url_for('appointment.appointment_action_toggle', action='accept', id=appointment.id)}}" class="btn btn-sm btn-primary">Accept</a>
                 <button class="btn btn-sm btn-danger">Cancel</button>
             </div>
             <div class="appointment-full">
