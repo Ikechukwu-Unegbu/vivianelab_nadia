@@ -65,3 +65,4 @@ Next would be marketing efforts and exploring equity based investments. Bootstra
 I Ikechukwu Vincent is currently the sole or rather pioneer author of this project. I am a Full Stack Software Engineer (Backend Major) with two years experience. Currently I worked mostly on healthcare SaaS applications using PHP Laravel, Python Flask and NextJs.
 I am currently Software Engineer and Project Manager at VivianeHealth Labs.
 
+
