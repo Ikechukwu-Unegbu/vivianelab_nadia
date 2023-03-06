@@ -19,9 +19,12 @@ def govupload():
 
 @settings.route('/settings/notification')
 def notification_settings():
+    """
+        Web notification settings endpoint.
+    """
     user = Helpers.get_user_type(current_user)
     if(user == 'therapist'):
-        logged_user = Therapist.query.get(current_user.id)
+        logged_user = User.query.get(current_user.id)
     elif(user == 'user'):
         logged_user = User.query.get(current_user.id)
     else:
@@ -33,13 +36,19 @@ def notification_settings():
 
 @settings.route('/settings/visibility')
 def visibility_settings():
+    """
+        Web endpoint that renders visibility settings page.
+    """
     return render_template('visibility_settings.html')
 
 @settings.route('/settings/security')
 def security_settings():
+        """
+        Web endpoint that renders security settings page.
+        """
         user = Helpers.get_user_type(current_user)
         if(user == 'therapist'):
-            logged_user = Therapist.query.get(current_user.id)
+            logged_user = User.query.get(current_user.id)
         elif(user == 'user'):
             logged_user = User.query.get(current_user.id)
         else:
@@ -50,6 +59,9 @@ def security_settings():
 
 @settings.route('/settings/password-change', methods=["POST"])
 def reset_password():
+    """
+        Web endpoint that renders password resset page.
+    """
     # get inputs from html
     old_password = request.form.get('old_password')
     new_password = request.form.get('new_password')
@@ -84,6 +96,9 @@ def reset_password():
 
 @settings.route('/settings/misc', methods=["POST"])
 def settings_misc():
+    """
+    Web endpont that renders miscellanous settings page.
+    """
     username = request.form.get('username')
     phone = request.form.get('phone')
     email = request.form.get('email')
@@ -125,13 +140,16 @@ def verification_settings():
 
 @settings.route('/settings/verification/identity')
 def settings_verification_identity():
+    """
+    Web end point that renders identity verification page.
+    """
     return render_template('verification_settings.html')
 
 @settings.route('/settings/verification/crime')
 def settings_verification_crime():
+    """
+    Web endpoint that renders crime history page.
+    """
     return render_template('verification_settings.html')
 
 
-@settings.route('/test-form')
-def test_form():
-    return render_template('form.html')
