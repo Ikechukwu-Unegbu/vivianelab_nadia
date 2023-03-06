@@ -1,5 +1,5 @@
 # Nadia
-<img src="/AssetUpload/hero.jpg">
+<img src="Assetupload\hero.jpg">
 
 I built Nadia as my final project or portfolio project for ALX - Holberton School of Software Engineering training as Full Stack Software Engineer. It was a unique opportunity to put everything I learned especially Python and it's Flask framework to test. 
 
