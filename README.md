@@ -60,7 +60,7 @@ Next would be marketing efforts and exploring equity based investments. Bootstra
 
 When or if **nadia** finally becomes profitable, larger percentage of the profit will go to charity courses in areas of:
 * **Spine Health related cases and research**
-* **Regerative Medicine**
+* **Regenerative Medicine**
 * **And scholarships in the above named fields**
 
 
