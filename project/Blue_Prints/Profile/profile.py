@@ -24,15 +24,13 @@ profile = Blueprint('profile', __name__, template_folder='templates', static_fol
 
 
 
-
-@profile.route('/uploads/')
-def uploaded_file():
-    return send_from_directory(current_app.config['AVATAR_FOLDER'], 'alx.jpg')
-
-
 @profile.route('/dashboard/my/')
 @login_required
 def myprofile():
+    """
+        This endpoint renders the logged in medic's profile. If user
+        tries to access it when not logged  in Flask will direct the user to login.
+    """
     # make sure that given id is same as auth user id
     if current_user.access == 'user' or current_user.access == 'USER':
         return redirect(url_for('main.dashboard'))
@@ -49,6 +47,9 @@ def myprofile():
 @profile.route('/update/bio-tagline', methods=["POST"])
 @login_required
 def update_bio_tagline():
+    """
+    Endpoint to update bio, name and tagline on the web.
+    """
     # Query the therapist with the given id
     therapist = User.query.filter_by(id=current_user.id).first()
 
@@ -64,6 +65,9 @@ def update_bio_tagline():
 @profile.route('/avatar/upload', methods=["POST"])
 @login_required
 def upload_avatar():
+    """
+    This endpoint uploads new profile images from profile.
+    """
     if request.method == 'POST':
         # Check if the post request has the file part
         if 'file' not in request.files:
@@ -93,6 +97,9 @@ def upload_avatar():
 @profile.route('/add-work', methods=["POST"])
 @login_required 
 def add_work_history():
+    """
+    End point to add work history for users and medics.
+    """
     employer = request.form.get('employer')
     title = request.form.get('job_title')
     description = request.form.get('description')
@@ -122,6 +129,9 @@ def add_work_history():
 @profile.route('/edit-work/<int:id>', methods=["POST"])
 @login_required 
 def edit_work_history(id):
+    """
+       Endpoint for updating existing work history 
+    """
     employer = request.form.get('employer')
     title = request.form.get('job_title')
     description = request.form.get('description')
@@ -153,6 +163,9 @@ def edit_work_history(id):
 @profile.route('/add-education', methods=["POST"])
 @login_required 
 def add_education_history():
+    """
+        Endpoint to add new school or education history.
+    """
     school = request.form.get('school')
     course = request.form.get('course')
     description = request.form.get('description')
@@ -185,6 +198,9 @@ def add_education_history():
 @profile.route('/edit-education/<int:id>', methods=["POST"])
 @login_required 
 def edit_education_history(id):
+    """
+    Endpoint to edit existing work history.
+    """
     school = request.form.get('school')
     course = request.form.get('course')
     description = request.form.get('description')
@@ -212,6 +228,9 @@ def edit_education_history(id):
 @profile.route('/delete-work/<id>')
 @login_required
 def delete_work(id):
+    """
+    endpoint to delete work history
+    """
     # find the record you want to delete
     work = Work.query.get(id)
 
@@ -224,6 +243,9 @@ def delete_work(id):
 @profile.route('/delete-education/<id>')
 @login_required
 def delete_education(id):
+    """
+    Endpoint to delete education history
+    """
     # find the record you want to delete
     edu = Education.query.get(id)
 
@@ -237,6 +259,9 @@ def delete_education(id):
 @profile.route('/add-cities', methods=['POST'])
 @login_required
 def add_cities():
+    """
+    Endpoint to add city of residence.
+    """
     # get the submitted city IDs as an array
     city_ids = request.json.get('city_ids')
     # get the model of the logged-in user
@@ -252,6 +277,9 @@ def add_cities():
 
 @profile.route('/get-therapist-cities/<int:id>')
 def get_therapist_cities(id):
+    """
+    this endpoint gets therapists who operate in city with given id
+    """
     if current_user.is_authenticated:
         # Query UserCity model to get all rows where user_id = current user's id and user_model is therapist
         user_cities = UserCity.query.filter_by(user_id=id).all()
