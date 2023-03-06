@@ -35,18 +35,22 @@
               </b></small>
             </div>
            
-            {% if current_user.__table__.name == 'user'%}
             <div class="mt-3 mb-3 booking-div">
               <button class="btn btn-default btn-secondary">Review</button>
+              {% if current_user.is_authenticated %}
               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#book">Book Now</button>
+              {% else: %}
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#book_login">Book Now</button>
+              {% endif %}
+
             </div>
-            {% endif %}
+          
 
             <!-- language -->
             <div class="">
               <h5 class="">Languages</h5>
               <div class="deet mt-2">
-                <span class="deet_key">English: </span>
+                <span class="deet_key">French: </span>
                 <span>Fluent</span>
               </div>
               <div class="deet mt-2">
@@ -282,7 +286,7 @@
 
 </script>
 {% include "profile/_location_modal.html" %}
-{% if therapist_id != current_user.id %}
-{% include "profile/_book_modal.html" %}
-{% endif %}
+
+  {% include "profile/_book_modal.html" %}
+
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user
 # init SQLAlchemy so we can use it later in our models
@@ -8,6 +8,11 @@ from flask_migrate import Migrate
 
 # migrate = Migrate()
 db = SQLAlchemy()
+
+
+# @main.errorhandler(404)
+def page_not_found(e):
+    return render_template('pages/error/404.html')
 
 def create_app():
     app = Flask(__name__)
@@ -46,6 +51,7 @@ def create_app():
             notifications = []
         return dict(notifications=notifications)
 
+    app.register_error_handler(404, page_not_found)
     # blueprint for auth routes in our app
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)

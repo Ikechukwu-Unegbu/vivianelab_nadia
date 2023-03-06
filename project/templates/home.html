@@ -3,6 +3,7 @@
 {% block styles %}
 <link rel="stylesheet" href="../static/css/home.css">
 <link rel="stylesheet" href="{{url_for('main.static', filename='css/index.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
   .search_btn{
     border-style: solid;
@@ -23,18 +24,28 @@
     <div class="p-5 mb-4 bg-light rounded-3 hero">
         <div class="container-fluid py-5">
           <h1 class="display-5 fw-bold " style="color:rgb(75, 75, 75);">nadia...</h1>
-          <!-- <p class="col-md-8 fs-4 text-dark">Discover nearby physiotherapists and physiotherapy clinics.</p> -->
-          <button style="font-weight:bolder;color:rgb(75, 75, 75); " class="btn  search_btn btn-lg mt-5" type="button">Search Now</button>
+          <!-- <p class="col-md-8 fs-4 text-dark">Discover nearby physiotherapists in simple steps.</p> -->
+          <a href="{{url_for('main.search_therapists_by_city', cite_name=none)}}" style="font-weight:bolder;color:rgb(75, 75, 75); " class="btn  search_btn btn-lg mt-5" >Search Now</a>
         </div>
       </div>
   
       <div class="row align-items-md-stretch">
         <div class="col-md-6  ">
           <div class="h-100 p-5 info-1 text-bg-dark rounded-3">
-            <h2>All You can Do</h2>
-            <p>Search for top-rated physiotherapists in your area.</p>
-            <p>Book appointments instantly through the app.</p>
-            <p>  Get access to detailed reviews and ratings from other patients</p>
+            <h2 class="text-dark">Discover Therapists in easy steps.</h2>
+            <div class="info_div">
+              <i   class="fa-solid fa-circle-dot"></i>
+              <p>Search for top-rated physiotherapists in your area.</p>
+            </div>
+            <div class="info_div">
+              <i   class="fa-solid fa-circle-dot"></i>
+              <p>Book <b >appointments</b> instantly </p>
+            </div>
+            <div class="info_div">
+              <i   class="fa-solid fa-circle-dot"></i>
+              <p>  Get access to detailed reviews and ratings from other patients</p>
+            </div>
+           
            
           </div>
         </div>

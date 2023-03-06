@@ -1,6 +1,15 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .hero{
+    /* background-image: url('https://img.freepik.com/free-vector/hand-drawn-flat-design-occupational-therapy-illustration_52683-84242.jpg?w=740&t=st=1678118240~exp=1678118840~hmac=48996e7c6ce64abd27f86da48e84e4a2ae0afbbd2de92de7d451c965f36ac810'); */
+    /* background-image: url('https://img.freepik.com/premium-vector/rehabilitation-body-treatment-doing-special-exercises-strengthening-body-wellness-health-care-coach-helping-character-stretch-big-fitness-ball-gym-vector-flat-style_87689-2020.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
     background-image: url('https://media.istockphoto.com/id/1321089024/photo/doctors-do-it-for-the-health-of-it.jpg?s=1024x1024&w=is&k=20&c=JEk_kEhPjGGCSb0qX634hwvKIen9mZSkFPZ6iFKcr_A=');
     height: 80vh;
+    background-color: rgb(197, 197, 197);
 
 }
 
@@ -10,16 +19,30 @@
 }
 
 .info-1{
-    background-image: url('https://media.istockphoto.com/id/1139755582/photo/medical-equipment-on-the-background-of-group-of-health-workers-in-the-icu.jpg?s=1024x1024&w=is&k=20&c=7jrK90aF8uHKWkG1IP_VRB5KbkszzERurwqFCdc5dbQ=');
+    background-image: url('https://img.freepik.com/free-vector/sport-medicine-abstract-concept-vector-illustration-orthopaedic-medical-services-physician-specialist-sport-injury-rehabilitation-pain-management-medicine-athletes-abstract-metaphor_335657-4075.jpg?w=740&t=st=1678119233~exp=1678119833~hmac=d003bd45dbe99e5c67db9c51af927ba761537dfe15f40c1ca9639e47da957d1b');
+    /* background-image: url('https://media.istockphoto.com/id/1139755582/photo/medical-equipment-on-the-background-of-group-of-health-workers-in-the-icu.jpg?s=1024x1024&w=is&k=20&c=7jrK90aF8uHKWkG1IP_VRB5KbkszzERurwqFCdc5dbQ='); */
     background-repeat: no-repeat;
     background-size: cover;
+    box-shadow: 0 0 8px grey;
+    filter: brightness(120%) contrast(120%);
 }
 
-.info-1 p{
-    font-size: larger;
-    font-weight: bold;
+.info_div{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 1.4rem;
+    align-items: center;
+    justify-content:flex-start;
 }
+
+.info-1 p, .info-1 i{
+    font-size: larger;
+    /* font-weight: bold; */
+    /* font-size: large; */
+    color: rgb(19, 19, 19);
+}
+
 
 .info-1 .info-2{
-    box-shadow: 0 0 20px gray !important;
+    box-shadow: 0 0 8px grey;
 }

@@ -16,7 +16,7 @@ main = Blueprint('main', __name__, static_folder='static', static_url_path="/sta
 
 @main.route('/')
 def index():
-    theras =  User.query.filter_by(access='therapist').order_by(func.random()).limit(5).all()
+    theras =  User.query.filter_by(access='THERAPIST').order_by(func.random()).limit(5).all()
     
     return render_template('home.html', theras=theras)
 
@@ -64,8 +64,10 @@ def search_therapists_by_city():
         results = therapists
     else:
         results = None
-    return render_template('authenticated/user_dashboard.html', results=results, cities=searched_cities, c_u=city_users,thera_id=therapist_ids)
-
+    if current_user.is_authenticated:
+        return render_template('authenticated/user_dashboard.html', results=results, cities=searched_cities)
+    else: 
+        return render_template('authenticated/user_dashboard.html', results=results, cities=searched_cities)
 
 @main.route('/notifications')
 def notifications():
@@ -76,3 +78,5 @@ def notifications():
     #     db.session.commit()
 
     return render_template('pages/notifications/notifications.html')
+
+

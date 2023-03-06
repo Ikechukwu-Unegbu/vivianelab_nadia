@@ -1,0 +1,28 @@
+{% extends "layouts/guest.html" %}
+{% block sytles %}
+<style>
+    .err_container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* background-color:; */
+    }
+    .img{
+        box-shadow: 0 0 10px gainsboro;
+    }
+    .btn_sec{
+        box-shadow: 0 0 10px rgb(163, 162, 162) !important;
+        
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container err_container">
+    <!-- <img src="" alt=""> -->
+    <h4 class="mt-5 text-center text-secondary">How did you get here?</h4>
+    <h5 class="text-center"><a href="/" class="text-center btn btn-secondary btn_sec">Let's Go back home</a></h5>
+    <img class="img img-fluid" src="https://img.freepik.com/premium-vector/illustrations-negative-expression-angry-business-woman-oops-404-error-design-concept-website_576269-338.jpg?w=740" alt="">
+</main>
+{% endblock %}

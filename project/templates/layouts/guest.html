@@ -88,8 +88,8 @@
                 <a class="nav-link ">Contact Us</a>
               </li>
             </ul>
-            <form class="d-flex" role="search" class="home_search_form">
-              <input style="border-radius:20px; width:20rem;" class="form-control me-2" type="search" placeholder="Find nearby therapist" aria-label="Search">
+            <form class="d-flex" role="search" action="{{url_for('main.search_therapists_by_city')}}" method="GET" class="home_search_form">
+              <input style="border-radius:20px; width:20rem;" name="city_name" class="form-control me-2" type="search" placeholder="Find nearby therapist" aria-label="Search">
               <button style="border-radius:20px; width: 8rem;" class="btn btn-outline-primary" type="submit">Search</button>
             </form>
           </div>
