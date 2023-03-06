@@ -11,6 +11,8 @@
 
 .info-1{
     background-image: url('https://media.istockphoto.com/id/1139755582/photo/medical-equipment-on-the-background-of-group-of-health-workers-in-the-icu.jpg?s=1024x1024&w=is&k=20&c=7jrK90aF8uHKWkG1IP_VRB5KbkszzERurwqFCdc5dbQ=');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .info-1 p{

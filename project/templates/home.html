@@ -3,6 +3,18 @@
 {% block styles %}
 <link rel="stylesheet" href="../static/css/home.css">
 <link rel="stylesheet" href="{{url_for('main.static', filename='css/index.css')}}">
+<style>
+  .search_btn{
+    border-style: solid;
+    border-color: grey;
+    border-width:2px;
+    width: fit-content !important;
+  }
+  .search_btn:hover{
+    background-color: gray !important;
+    color: white !important;
+  }
+</style>
 {% endblock %}
 
 
@@ -10,9 +22,9 @@
 <main class="container mt-5">
     <div class="p-5 mb-4 bg-light rounded-3 hero">
         <div class="container-fluid py-5">
-          <h1 class="display-5 fw-bold text-dark">nadia Technologies</h1>
-          <p class="col-md-8 fs-4 text-dark">Discover nearby physiotherapists and physiotherapy clinics.</p>
-          <button class="btn btn-primary btn-lg" type="button">Search Now</button>
+          <h1 class="display-5 fw-bold " style="color:rgb(75, 75, 75);">nadia...</h1>
+          <!-- <p class="col-md-8 fs-4 text-dark">Discover nearby physiotherapists and physiotherapy clinics.</p> -->
+          <button style="font-weight:bolder;color:rgb(75, 75, 75); " class="btn  search_btn btn-lg mt-5" type="button">Search Now</button>
         </div>
       </div>
   
