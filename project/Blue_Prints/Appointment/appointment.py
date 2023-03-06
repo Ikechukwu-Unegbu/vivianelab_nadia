@@ -16,6 +16,10 @@ appointment = Blueprint('appointment', __name__, template_folder='templates', st
 
 @appointment.route('/medic/appointments')
 def medic_appointments():
+    """
+        This function medic_appointments is web endpoint for medics to see alll their 
+        appointments.
+    """
     page = request.args.get('page', 1, type=int)
     appointments = Appointment.query.join(User, Appointment.user_id == User.id). \
                   filter(Appointment.therapist_id == current_user.id). \
@@ -31,6 +35,10 @@ def medic_appointments():
 
 @appointment.route('/user/appointments')
 def patient_appointments():
+    """
+        This is a web endpoint for users to see all their appointments both expired and upcoming.
+
+    """
     page = request.args.get('page', 1, type=int)
     appointments = Appointment.query.join(User, Appointment.user_id == User.id). \
                   filter(Appointment.user_id == current_user.id). \
@@ -46,6 +54,10 @@ def patient_appointments():
 
 @appointment.route('/appointment/<string:action>/<int:id>')
 def appointment_action_toggle(action,id):
+    """
+    This is a web endpoint for medics to respond to appointment.
+    The medic can either accept or decline appointment.
+    """
     appointment = Appointment.query.get(id)
 
     if action == "accept": 
@@ -87,6 +99,9 @@ def medic_single_appointment():
 
 @appointment.route('/appoint', methods=["POST"])
 def book_appointment():
+    """
+        This is web enpointments for patients to book appointments.
+    """
     therapist_id = request.form.get('therapist_id')
     city = request.form.get('city')
     address = request.form.get('address')
