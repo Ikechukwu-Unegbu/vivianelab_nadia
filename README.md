@@ -36,4 +36,32 @@ I believe those three words captures the entirety of Physiotherapy hence I chose
 
 
 ## Technology Stack 
-[Flask](https://flask.palletsprojects.com/en/2.2.x/)
+[Python](https://en.wikipedia.org/wiki/Python_(programming_language)) - General purpose programming language with wide application in backend web development
+
+[Flask](https://flask.palletsprojects.com/en/2.2.x/) - Python based lightweight webframework
+
+[JavaScript](https://en.wikipedia.org/wiki/JavaScript) - Frontend scripting language
+
+[Bootstrap](https://en.wikipedia.org/wiki/Bootstrap_(front-end_framework)) - Free Open source CSS framework.
+
+
+## Future
+The future of this application starts immediately after my graduation from Holberton ALX Software Engineering training. I will focus on cleaning up existing features of the application while adding more features some of which will include: 
+* API endpoints for mobile app
+* Developing the mobile app
+* Improving existing admin dashboard
+* Integrating content management system like wordpress
+* Therapists can create plans/packages
+* AI powered patient recovery assistant
+* Integration with Vivianehealth suit of medical softwares.
+* Incorporation and growing a team
+
+Next would be marketing efforts and exploring equity based investments. Bootstrapping however is the first choice.
+
+
+## Authors
+
+#### Ikechukwu Vincent
+I Ikechukwu Vincent is currently the sole or rather pioneer author of this project. I am a Full Stack Software Engineer (Backend Major) with two years experience. Currently I worked mostly on healthcare SaaS applications using PHP Laravel, Python Flask and NextJs.
+I am currently Software Engineer and Project Manager at VivianeHealth Labs.
+
