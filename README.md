@@ -58,6 +58,10 @@ The future of this application starts immediately after my graduation from Holbe
 
 Next would be marketing efforts and exploring equity based investments. Bootstrapping however is the first choice.
 
+When or if **nadia** finally becomes profitable, larger percentage of the profit will go to charity courses in areas of:
+* **Spine Related courses and research**
+* **Regerative Medicine**
+* **And scholarships in the above named fields**
 
 ## Authors
 
