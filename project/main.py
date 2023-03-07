@@ -63,6 +63,7 @@ def search_therapists_by_city():
             therapists = []
         results = therapists
     else:
+        
         results = None
     if current_user.is_authenticated:
         return render_template('authenticated/user_dashboard.html', results=results, cities=searched_cities)

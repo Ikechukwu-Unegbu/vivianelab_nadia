@@ -47,19 +47,27 @@
       width: 5rem;
       border-radius: 50% !important;
     }
+    .search_div{
+      background-image: url('https://img.freepik.com/free-vector/physiotherapy-concept-illustration_114360-7674.jpg?w=740&t=st=1678140502~exp=1678141102~hmac=f2b1c92ab112f1392a16a6e43e5e00c96fecdd8ea636b7ab7721bdea9de9319a');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
   </style>
 {% endblock %}
 
 {% block content  %}
   <main class="container mt-5">
-    <div class="mt-5 mb-5">
+    <div class="mt-5 mb-5 search_div" style="display:flex; flex-direction: column; justify-content: center; align-items: center;">
     {% if current_user.is_authenticated %}
-    <h4 class="text-center text-primary">Hi {{current_user.fullname}}</h4>
-    {% if appointments|length == 0 %}
-      <h5 class="text-center text-dark mt-4 mb-4"> You have No Running Appointments or Running Plans</h5>
-    {% else %}
-      <h5 class="text-center text-secondary mt-4 mb-4 ">There are {{ appointments|length }} upcoming appointments.</h5>
-    {% endif %}
+      <h4 class="text-center text-primary">Hi {{current_user.fullname}}</h4>
+      {% if appointments|length == 0 %}
+        <h5 class="text-center text-dark mt-4 mb-4"> You have No Running Appointments or Running Plans</h5>
+      {% else %}
+        <h5 class="text-center text-secondary mt-4 mb-4 ">There are {{ appointments|length }} upcoming appointments.</h5>
+      {% endif %}
+    {% else: %}
+      <h4 class="text-center text-primary">Hi, enter your city and find physiotherapist</h4>
+      <!-- <img class="img img-fluid" src="https://img.freepik.com/free-vector/physiotherapy-concept-illustration_114360-7674.jpg?w=740&t=st=1678140502~exp=1678141102~hmac=f2b1c92ab112f1392a16a6e43e5e00c96fecdd8ea636b7ab7721bdea9de9319a" alt=""> -->
     {% endif %}
       
     </div>
